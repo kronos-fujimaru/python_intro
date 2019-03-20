@@ -1,0 +1,416 @@
+<h1>7章 クラス</h1>
+
+<p>この章ではクラスについて学習します。</p>
+
+<h2>クラスとは</h2>
+
+<p>クラスとは、属性（データ）とその操作（メソッド）をまとめたオブジェクトの雛形を定義したものです。</p>
+
+<p><img src="images/07/class1.png" width="70%"></p>
+
+<p>クラスを利用するには以下の手順が必要です。</p>
+
+<ol>
+<li>クラスとクラスのメンバ（属性と操作）を定義する</li>
+<li>インスタンスを生成する</li>
+<li>クラスのメンバを利用する</li>
+</ol>
+
+
+<p><img src="images/07/class2.png" width="70%"></p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>1.クラスとクラスのメンバを定義する</h3>
+
+<p>ここではユーザー情報を扱いたいとしましょう。
+クラスを作成するには<code>class</code>を使用します。</p>
+
+<pre><code class="python">class User:
+  pass
+</code></pre>
+
+<h4>コンストラクタ</h4>
+
+<p>クラスにメンバを定義する前に、コンストラクタと呼ばれる特殊なメソッドする必要があります。
+コンストラクタは名前が決まっており、<code>__init__(self)</code>です。</p>
+
+<pre><code class="python">class User:
+  def __init__(self):
+    pass
+</code></pre>
+
+<p>コンストラクタはクラスをインスタンス化した時に呼ばれる、メソッドです。
+主にインスタンスの初期化のために利用されます。</p>
+
+<h4>属性の追加</h4>
+
+<p>クラスに属性を追加する場合は、<code>self.属性名</code>を定義します。
+ユーザーに必要な属性は、姓、名、年齢としましょう。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+</code></pre>
+
+<blockquote><p>selfについて
+Pythonではインスタンスメソッドを定義する時に、引数に必ずselfを記述するというルールがあります。
+selfは自分自身のオブジェクトを意味します。</p></blockquote>
+
+<h4>操作の追加</h4>
+
+<p>クラスに操作を追加する場合は、クラス内にメソッドを定義します。
+ここではユーザーのフルネームを取得するメソッドを定義してみましょう。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+</code></pre>
+
+<p>これでユーザークラスを定義できました。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>2.インスタンスを生成する</h3>
+
+<p>クラスを定義したら次にインスタンスを生成する必要があります。
+インスタンスの生成は以下のようにします。</p>
+
+<pre><code class="python">user = User("Tanaka", "Taro", 20)
+</code></pre>
+
+<p>Userの引数はコンストラクタの引数に受け渡されます。その際、selfには自動的にインスタンス自身が代入され、それより後の引数に代入されます。
+print関数を使用して、確認してみましょう。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    print(self)         # &lt;__main__.User object at 0x10482ee80&gt;
+    print(first_name)   # Tanaka
+    print(last_name)    # Taro
+    print(age)          # 20
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンス化
+user = User("Tanaka", "Taro", 20)
+</code></pre>
+
+<h3>3.クラスのメンバを利用する</h3>
+
+<p>最後にクラスのメンバを利用してみましょう。
+メンバを利用するには<code>インスタンス.メンバ</code>で指定します。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンス化
+user1 = User("Tanaka", "Taro", 20)
+
+# メンバの利用
+print(user1.first_name)      # Tanaka
+print(user1.last_name)       # Taro
+print(user1.age)             # 20
+print(user1.get_full_name()) # Tanaka Taro
+
+# いくつでもインスタンス化できる
+user2 = User("Suzuki", "Hanako", 21)
+
+print(user2.first_name)      # Suzuki
+print(user2.last_name)       # Hanako
+print(user2.age)             # 21
+print(user2.get_full_name()) # Suzuki Hanako
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>クラスの役割</h2>
+
+<p>クラスの役割は属性と操作を分類する（Classify）ことです。
+クラスにはどういうメリットがあるのか、クラスを利用する場合と利用しない場合で比べてみましょう。
+まず、クラスを利用しない場合の例をみてみましょう。
+ユーザー情報を画面に出力するプログラムを考えます。</p>
+
+<pre><code class="python">def get_full_name(last_name, first_name):
+  return last_name + " " + first_name
+
+def show_two_users(user1_first_name, user1_last_name, user1_age,
+                   user2_first_name, user2_last_name, user2_age):
+  print("Name : ", get_full_name(user1_last_name, user1_first_name))
+  print("Age : ", user1_age)
+  print("Name : ", get_full_name(user2_last_name, user2_first_name))
+  print("Age : ", user2_age)
+
+
+user1_first_name = "Taro"
+user1_last_name = "Tanaka"
+user1_age = 20
+
+user2_first_name = "Hanako"
+user2_last_name = "Suzuki"
+user2_age = 21
+
+show_two_users(user1_first_name, user1_last_name, user1_age,
+               user2_first_name, user2_last_name, user2_age)
+</code></pre>
+
+<p>引数や関数が多くて非常に煩雑な様子がわかると思います。
+Userクラスを利用してこれを整理してみましょう。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+
+def show_two_users(user1, user2):
+  print("Name : ", user1.get_full_name())
+  print("Age : ", user1.age)
+  print("Name : ", user2.get_full_name())
+  print("Age : ", user2.age)
+
+# インスタンス化
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+show_two_users(user1, user2)
+</code></pre>
+
+<p>クラスのおかげで、ユーザーの情報をまとめて一つとして扱えるようになりました。
+それにより、引数も減り、かなり簡潔になったのではないでしょうか。
+情報量が多ければ多いほどクラスの効果は大きくなります。
+実際のプログラムではUserクラスを別ファイルに記述するのが一般的です。
+そうすることで更に簡潔にプログラミングできるようになるでしょう。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>クラス属性</h2>
+
+<p>今まで学習してきた属性はインスタンスに紐づいており、インスタンスを生成しないと使用できませんでした。
+クラス属性を定義することでインスタンスに依存しない属性をクラスに持たせることができます。</p>
+
+<pre><code class="python">class User:
+
+  # クラス属性
+  count = 0
+
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+    __class__.count += 1
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンスを生成せずに利用できる
+print(User.count) # 0
+
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+print(User.count) # 2
+</code></pre>
+
+<h2>クラスメソッド</h2>
+
+<p>クラスメソッドはインスタンスに依存しないメソッドです。
+<code>@classmethod</code>を使用して定義します。</p>
+
+<pre><code class="python">class User:
+
+  # クラス属性
+  count = 0
+
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+    __class__.count += 1
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+  # クラスメソッド
+  @classmethod
+  def get_count(cls):
+    print("Number of user is ", cls.count)
+
+# インスタンスを生成せずに利用できる
+User.get_count()  # Number of user is  0
+
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+User.get_count()  # Number of user is  2
+</code></pre>
+
+<p>インスタンスメソッドの引数にselfを指定するのと同じように、クラスメソッドの引数にはclsを指定します。clsにはクラスの情報が代入されます。</p>
+
+<h2>スタティックメソッド</h2>
+
+<p>スタティックメソッドはクラスメソッドと同様にインスタンスに依存しないメソッドです。
+ただしスタティックメソッドは、引数にクラスの情報が代入されません。
+そのためクラスにも依存しないメソッド、関数に近いものと考えてよいでしょう。</p>
+
+<pre><code class="python">class Math:
+  @staticmethod
+  def add(x, y):
+    return x + y
+
+  @staticmethod
+  def multi(x, y):
+    return x * y
+
+# (2 + 3) * 5
+print(Math.multi(Math.add(2, 3), 5))
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>継承</h2>
+
+<p>継承の仕組みを利用することで、既存のクラスを拡張したクラスを定義することができます。
+継承を利用するには<code>class クラス名(継承元クラス)</code>とします。
+ユーザークラスを継承した社社員クラスを定義してみましょう。
+社員クラスはユーザー情報の他に社員番号（EMPNO）を持つとします。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    # 親のコンストラクタ呼び出し
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(self.get_full_name + " working...")
+</code></pre>
+
+<p>継承元のクラス（User）を親クラスやスーパークラスと呼び、継承先のクラス（Employee）を子クラスやサブクラスと呼びます。
+子クラスでは、親のインスタンスを参照したい場合は、superメソッドを使用します。
+子クラスは親クラスの属性と操作を継承します。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    # 親のコンストラクタ呼び出し
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(self.get_full_name() + " working...")
+
+emp = Employee("001", "Tanaka", "Taro", 20)
+
+# 親クラスの属性
+print(emp.last_name)    # Tanaka
+print(emp.first_name)   # Taro
+print(emp.age)          # 20
+
+# 親クラスの操作
+print(emp.get_full_name())  # Tanaka Taro
+
+# 自クラスの属性
+print(emp.empno)      # 001
+
+# 自クラスの操作
+emp.work()            # Tanaka Taro working...
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>オーバーライド</h2>
+
+<p>親クラスで定義されたメソッドを子クラスで再定義することをオーバーライドと言います。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(super().get_full_name() + " working...")
+
+  def get_full_name(self):
+    return "Name : " + self.last_name + " " + self.first_name
+
+emp = Employee("001", "Tanaka", "Taro", 20)
+
+print(emp.get_full_name())  # Name : Tanaka Taro
+</code></pre>
+
+<h2>多重継承</h2>
+
+<p>多くのオブジェクト指向言語で多重継承は許可していませんが、Pythonでは多重継承を許しています。</p>
+
+<pre><code class="python">class Robot:
+  def charge(self):
+    print("charging...")
+
+class Dog:
+  def bark(self):
+    print("barking...")
+
+class RobotDog(Robot, Dog):
+  pass
+
+bob = RobotDog()
+bob.charge()    # charging...
+bob.bark()      # barking...
+</code></pre>
+
+<blockquote><p>親クラス内に同一メソッドが存在する場合は、先に記述したクラスのメソッドが優先されます。</p></blockquote>

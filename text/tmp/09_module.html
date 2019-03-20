@@ -1,0 +1,103 @@
+<h1>9章 モジュール化</h1>
+
+<p>この章ではモジュール化について学習します。</p>
+
+<h2>モジュール化とは</h2>
+
+<p>複雑なシステム機能を相互依存の強い部品同士で構成するのではなく、交換可能で独立した部品同士で構成するようにすることをモジュール化と言います。わかりやすく言い換えると、機能ごとに別ファイルに分類しましょうと言うことです。</p>
+
+<h3>機能ごとに別ファイルに分類する</h3>
+
+<p>計算機能を定義した<code>calculator.py</code>と、計算を実行するための<code>calculator_main.py</code>ファイルを別々に作成してみましょう。まず、以下の内容で<code>calculator.py</code>を作成します。</p>
+
+<pre><code class="python">def add(x, y):
+  return x + y
+</code></pre>
+
+<p>次に<code>calculator_main.py</code>を作成します。別モジュールを使用するにはインポートという作業を行う必要があります。<code>import モジュール名</code>でインポートできます。</p>
+
+<pre><code class="python">import calculator
+
+print(calculator.add(3, 4))
+</code></pre>
+
+<p>モジュールを作成したら、コマンドラインから<code>calculator_main.py</code>を実行します。</p>
+
+<pre><code>% python calculator_main.py
+7
+</code></pre>
+
+<p>また、また、インポート文を<code>from モジュール名 import インポート対象</code>とすることで、参照時に省略が可能です。</p>
+
+<pre><code class="python">from calculator import add
+
+print(add(3, 4))
+</code></pre>
+
+<h3>モジュールをパッケージ（フォルダ）ごとに分類する</h3>
+
+<p>モジュール化が進みファイルの数が増えてくると、今度はファイルの管理が難しくなってきます。ファイルが増えてきたらフォルダ分けしてファイルを管理しますよね。それと同様にしてモジュールもフォルダ分けして管理するようにします。このフォルダのことをパッケージと呼びます。先ほどの2ファイルを以下のようにフォルダ分けしてみましょう。</p>
+
+<pre><code>├── calculator_main.py
+└── exercise
+    └── calculator.py
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>スクリプト化</h2>
+
+<p>以下の内容でexercise.greeterモジュールを作成してください。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+  print(message)
+
+greet()
+</code></pre>
+
+<pre><code>[ディレクトリ構成]
+├── calculator_main.py
+└── exercise
+    ├── calculator.py
+    └── greeter.py
+</code></pre>
+
+<p>greeterモジュールをcalculator_mainモジュールにインポートしてみましょう。</p>
+
+<pre><code class="python">from exercise.calculator import add
+import exercise.greeter
+
+print(add(3, 4))
+</code></pre>
+
+<p>作成できたら実行します。</p>
+
+<pre><code>% python calculator_main.py
+Hello
+7
+</code></pre>
+
+<p>calculator_mainモジュールではgreet関数は呼び出していませんが、Helloが出力されてしまっています。このようにグローバルスコープに書かれた内容はインポート時に自動的に実行されてしまいます。これを回避するには、スクリプト実行された場合のみgreet関数を呼び出すように、greeterモジュールを以下のように修正します。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+  print(message)
+
+if __name__ == '__main__':
+  greet()
+</code></pre>
+
+<p>修正したら実行します。</p>
+
+<pre><code>% python calculator_main.py
+7
+</code></pre>
+
+<p>追記された<strong>name</strong>変数は特殊な変数で、import時にはモジュール名が自動的に代入され、スクリプト実行時には<strong>main</strong>が代入されます。
+そのため、greeterモジュールをスクリプト実行するとHelloが出力されます。</p>
+
+<pre><code>% python exercise/greeter.py
+Hello
+</code></pre>

@@ -1,0 +1,250 @@
+<h1>3章 基本文法</h1>
+
+<p>この章ではPythonの基本文法について学習します。</p>
+
+<h2>コメント</h2>
+
+<p>コメントはプログラムとして評価されない文章で、ソースコードの説明などに使用します。
+Pythonでコメントをつけるときは<code>#</code>を使用します。2章で作成した<code>hello.py</code>にコメントをつけてみましょう。</p>
+
+<pre><code class="python"># greeting
+print("Hello Wolrd!")
+</code></pre>
+
+<p>ファイルを作成したら実行します。</p>
+
+<pre><code>% python sources/03/hello.py
+Hello World!
+</code></pre>
+
+<p>出力結果に何も変化がないことがわかると思います。</p>
+
+<p>また、複数行のコメントを描きたい場合は、<code>'''</code>で囲みます。</p>
+
+<pre><code class="python">'''
+greeting
+to You
+'''
+print("Hello World!")
+</code></pre>
+
+<p>コメント機能は開発者がソースコード上で取れる数少ないコミュニケーションの一つです。
+使用上の注意点やソースの意図の説明など、効果的なコメントを残すことを心がけるようにしましょう。</p>
+
+<h2>演算子</h2>
+
+<p>Pythonには主に以下の演算子があります。</p>
+
+<ul>
+<li>算術演算子</li>
+<li>比較演算子</li>
+<li>論理演算子</li>
+</ul>
+
+
+<h3>算術演算子</h3>
+
+<p>算術演算子は計算をするための記号です。</p>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>加算、文字列結合</td>
+</tr>
+<tr>
+<td>-</td>
+<td>減算</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乗算</td>
+</tr>
+<tr>
+<td>/</td>
+<td>浮動小数点の除算</td>
+</tr>
+<tr>
+<td>//</td>
+<td>整数の除算（切り捨て）</td>
+</tr>
+<tr>
+<td>%</td>
+<td>剰余算</td>
+</tr>
+<tr>
+<td>**</td>
+<td>指数</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>実際に計算してみましょう。</p>
+
+<pre><code class="python">print(2 + 3)  # 5
+print(3 - 2)  # 1
+print(3 * 2)  # 6
+print(3 / 2)  # 1.5
+print(3 // 2) # 1
+print(3 % 2)  # 1
+print(3 ** 2) # 9
+print("Hello" + " World!")  # Hello World!
+</code></pre>
+
+<p>Pythonで算術演算子を扱う場合、ひとつ注意点があります。
++演算子を使って、<strong>数値と文字列の結合はできない</strong> ということです。
+他の言語では可能である場合もあるので注意しましょう。</p>
+
+<pre><code class="python"># エラーが発生する
+# print("1 + 1 = " + 1 + 1)
+
+# 数値を文字列に変換した上で、文字列結合する
+print("1 + 1 = " + str(1 + 1))
+</code></pre>
+
+<blockquote><p>Pythonには、インクリメント、デクリメント演算子もありませんので、注意してください。</p></blockquote>
+
+<h3>比較演算子</h3>
+
+<p>比較演算子は比較をするための記号です。比較結果は論理値で返されます。</p>
+
+<blockquote><p>論理値とは真偽を表す値で、TrueまたはFalseが定められています。</p></blockquote>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;</td>
+<td>小なり</td>
+</tr>
+<tr>
+<td>></td>
+<td>大なり</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>以下</td>
+</tr>
+<tr>
+<td>>=</td>
+<td>以上</td>
+</tr>
+<tr>
+<td>==</td>
+<td>等しい</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>等しくない</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>実際に比較してみましょう。</p>
+
+<pre><code class="python">print(3 &lt; 2)  # False
+print(3 &gt; 2)  # True
+print(3 &lt;= 2) # False
+print(3 &gt;= 2) # True
+print(2 == 2) # True
+print(3 != 2) # True
+print("Hello" == "Hello") # True
+</code></pre>
+
+<p>Pythonでは異なる型の値の比較はFalseになります。</p>
+
+<pre><code class="python">print(1 == '1')  # False
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>論理演算子</h3>
+
+<p>論理演算子は、真偽を組み合わせた結果を論理値で返します。</p>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>and</td>
+<td>かつ</td>
+</tr>
+<tr>
+<td>or</td>
+<td>または</td>
+</tr>
+<tr>
+<td>not</td>
+<td>否定</td>
+</tr>
+</tbody>
+</table>
+
+
+<pre><code class="python">print(True and True)  # True
+print(True and False) # False
+print(True or True)   # True
+print(True or False)  # True
+print(not True)       # False
+print(not False)      # True
+</code></pre>
+
+<p>論理演算子は多くの場合、比較演算子と組み合わせて使用されます。</p>
+
+<pre><code class="python">print(3 &gt; 2 and 4 &gt; 5)  # False
+</code></pre>
+
+<h2>変数</h2>
+
+<p>変数とは、プログラムで扱われるデータを一定期間記憶し、必要なときに利用可能にするデータ格納場所に名前をつけたものです。[変数名 = 値]という書き方で値を代入します。</p>
+
+<pre><code class="python"># 変数名 = 値
+age = 20
+</code></pre>
+
+<p><code>age</code>という名前の箱に20という値を代入したとイメージするとわかりやすいと思います。</p>
+
+<p><img src="images/03/val.png" alt="val.png" /></p>
+
+<p>変数を使用する時は、変数名をそのまま指定します。</p>
+
+<pre><code class="python">age = 20
+
+print(age)  # 20
+</code></pre>
+
+<h2>予約語</h2>
+
+<p>予約語とは、プログラミング言語の仕様で意味が定められ、変数名や関数名として利用できない単語のことです。
+Pythonでは以下の予約語があります。</p>
+
+<pre><code>False, None, True, and, as, assert, break, class, continue, def, del, elif, else, except, finally,
+for, from, global, if, import, in, is, lambda, nonlocal, not, or, pass, raise, return, try, while,
+with, yield など
+</code></pre>
+
+<p>例えば以下のようにするとエラーとなります。</p>
+
+<pre><code class="python">and = 10
+
+print(and)
+</code></pre>

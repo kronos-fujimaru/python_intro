@@ -1,0 +1,117 @@
+<h1>1章Python概要</h1>
+
+<p>この章ではPythonの概要について学習します。</p>
+
+<h2>Pythonとは</h2>
+
+<p>Pythonとは、オランダ人のグイド・ヴァンロッサムによって開発されたオープンソースのオブジェクト指向スクリプト言語です。</p>
+
+<h2>Pythonの特徴</h2>
+
+<p>Pythonには一般的に以下の特徴があります。</p>
+
+<ol>
+<li>オブジェクト指向</li>
+<li>インタプリタ</li>
+<li>マルチプラットフォーム</li>
+<li>シンプルな構文</li>
+</ol>
+
+
+<h3>1.オブジェクト指向</h3>
+
+<p>オブジェクトとは、世の中に存在するモノ、コトを表し、属性（データ）と処理を持ちます。属性や処理をオブジェクトとしてまとめて扱うことで<strong>可読性</strong>や<strong>拡張性</strong>などを高めることができます。</p>
+
+<p><img src="images/01/oop.png" alt="oop" /></p>
+
+<h3>2.インタプリタ</h3>
+
+<p>プログラムは人間がコンピュータに出す命令なので人間の言葉で記述されますが、コンピュータは人間の言葉を読み取れません。そのため、機械語と呼ばれるコンピュータが読み取れる言語に翻訳する必要があります。</p>
+
+<p><strong>[コンパイラ型言語の場合]</strong><br/>
+C言語などのコンパイラ型言語はプログラムをコンパイルという作業を通して機械語に翻訳します。以下の内容で'hello.c'というファイルを作成します。</p>
+
+<pre><code class="c">#include "stdio.h"
+
+int main(int argc, char const *argv[]) {
+  printf("Hello World!");
+  return 0;
+}
+</code></pre>
+
+<p>プログラミング後、コンパイルを行います。</p>
+
+<pre><code>% gcc -o hello hello.c
+</code></pre>
+
+<p>コンパイルして作成された機械語のファイルを指定して実行します。</p>
+
+<pre><code>% ./hello
+  Hello World!
+</code></pre>
+
+<p><strong>[インタプリタ型言語の場合]</strong><br/>
+インタプリタ型は実行しながら1行ずつ翻訳します。以下の内容で<code>hello.py</code>というファイルを作成します。</p>
+
+<pre><code class="python">print("Hello World!")
+</code></pre>
+
+<p>プログラミング後、すぐに実行することができます。</p>
+
+<pre><code>python hello.py
+Hello World!
+</code></pre>
+
+<p>このようにインタプリタ型の言語ではプログラミング後、簡単に実行することができます。簡単に実行できる反面、文法的なエラーなどがあった場合に、実行するまでわからないなどの欠点があります。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>3.マルチプラットフォーム</h3>
+
+<p>機械語はプラットフォームによって異なります。そのため、機械語に翻訳すると言ってもそれぞれの環境に合わせて翻訳する必要があります。Pythonでは<strong>PVM</strong>（Python Virtual Maichine）と呼ばれる仮想マシンを用いて、各プラットフォームの差を埋めています。</p>
+
+<p><img src="images/01/pvm.png" alt="pvm" /></p>
+
+<p>これにより、プラットフォームの違いを意識せずにPythonを扱うことができるようになっています。</p>
+
+<h3>4.シンプルな構文</h3>
+
+<p>Pythonの構文は非常にシンプルな構成となっております。Javaと比較してみましょう。</p>
+
+<p><strong>[Javaの場合]</strong></p>
+
+<pre><code class="java">public class Sample {
+  public static void main(String[] args) {
+
+    int age = 20;
+
+    if(age &lt; 20) {
+      System.out.println("You are not adult");
+    } else {
+      System.out.println("You are adult");
+    }
+  }
+}
+</code></pre>
+
+<p><strong>[Pythonの場合]</strong></p>
+
+<pre><code class="python">age = 20
+
+if(age &lt; 20):
+    print("You are not adult")
+else:
+    print("You are adult")
+</code></pre>
+
+<p>見比べるとPythonの構文には以下の特徴があることがわかると思います。</p>
+
+<ul>
+<li>コードブロックは<code>{}</code>ではなく、インデントで指定する</li>
+<li>セミコロンが不要（記述してもOK）</li>
+<li>変数の型を指定しない</li>
+</ul>
+
+
+<p>このようにPythonはシンプルに記述でき、シンプルに実行できることが特徴といえるでしょう。</p>

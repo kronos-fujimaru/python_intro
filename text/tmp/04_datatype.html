@@ -1,0 +1,573 @@
+<h1>4章 データ型</h1>
+
+<p>この章ではPythonのデータ型について学習します。</p>
+
+<h2>データ型の種類</h2>
+
+<p><code>1</code>や<code>"Hello World!"</code>というようなデータには型があります。
+例えば'1'は整数型、"Hello World!"は文字列型です。
+全体像としては以下の図のようになっています。</p>
+
+<p><img src="images/04/datatype.png" width="70%"></p>
+
+<p>文字列と数値は結合できなかったりと、データ型を意識しながらプログラミングしていくことはとても大切になっていきます。</p>
+
+<h2>数値型</h2>
+
+<p>数値型は以下の3種類に分けることができます。</p>
+
+<ul>
+<li>整数型（int）</li>
+<li>論理型（boolean）</li>
+<li>浮動小数点型（float）</li>
+</ul>
+
+
+<blockquote><p>複素数は当テキストでは扱いません。</p></blockquote>
+
+<h3>整数型（int)</h3>
+
+<p>整数型は離散数値を表します。</p>
+
+<pre><code class="python">i1 = 10
+i2 = -4
+
+print(type(i1)) # &lt;class 'int'&gt;
+print(type(i2)) # &lt;class 'int'&gt;
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>論理型（boolean）</h3>
+
+<p>論理型は真偽値（True or False）のことです。
+Pythonでは数値を真偽値と同じ物として扱います。</p>
+
+<pre><code class="python">print(0 == False)   # True
+print(1 == True)    # True
+print(2 == True)    # False
+</code></pre>
+
+<p>他言語とは仕様が異なる場合があるので注意しましょう。</p>
+
+<h3>浮動小数点型（float）</h3>
+
+<p>浮動小数点型は小数値を表します。</p>
+
+<pre><code class="python">f1 = 0.5
+f2 = - 1 / 3
+
+print(type(f1)) # &lt;class 'float'&gt;
+print(type(f2)) # &lt;class 'float'&gt;
+</code></pre>
+
+<h4>丸め誤差について</h4>
+
+<p>コンピュータでは<code>0.3333...</code>のような循環小数や、とても小さい数を正確に扱うことができません。そういう値を扱う場合は、<strong>近似値</strong> を使用します。そのため、小さい小数値を扱う場合、計算結果に誤差が生じる可能性があることを留意しておいてください。</p>
+
+<pre><code class="python">f1 = 10 / 3
+
+print(f1)   # 3.3333333333333335
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>文字列型（str）</h2>
+
+<p>文字列型を扱うには<code>"（ダブルクォーテーション）</code>または、<code>'（シングルクォーテーション）</code>で囲みます。</p>
+
+<pre><code class="python">first_name = "Taro"
+last_name = 'Sato'
+
+print(type(first_name)) # &lt;class 'str'&gt;
+print(type(last_name))  # &lt;class 'str'&gt;
+</code></pre>
+
+<p>他の言語ではダブルクォーテーションとシングルクォーテーションを区別することもありますが、Pythonでは同一に扱います。</p>
+
+<p>基本的にはプログラム内で統一すると良いでしょう。
+ただし、文字列内でダブルクォーテーションを使いたい、または、シングルクォーテーションを使いたい場合は、別のほうを使用することで上手に処理することができます。</p>
+
+<pre><code class="python"># 以下のように書くと文字列の終了が正常に機能しない。
+message = 'Hello, 'Python'.'
+
+# ダブルクォーテーションを使用することで、対応できる。
+message = "Hello, 'Python'."
+</code></pre>
+
+<h3>エスケープシーケンス</h3>
+
+<p><code>/（バックスラッシュ）</code>を使用することで、文字の意味を消去することができます。</p>
+
+<pre><code class="python">message = 'Hello, \'Python\'.'
+print(message) # Hello, 'Python'.
+</code></pre>
+
+<p>シングルクォーテーションの前にバックスラッシュをつけることで、シングルクォーテーションは意味を失い、ただの文字列として扱うことができました。</p>
+
+<blockquote><p>Windowsの場合はバックスラッシュではなく、¥を使用します。</p></blockquote>
+
+<h2>None型</h2>
+
+<p>None型は少し特殊で、オブジェクトが存在しないことを意味します。</p>
+
+<pre><code class="python">n = None
+
+print(n)       # None
+print(type(n)) # &lt;class 'NoneType'&gt;
+</code></pre>
+
+<blockquote><p>他言語では多くの場合、nullと表現されます。</p></blockquote>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>リスト</h2>
+
+<p>リストは複数の要素から構成され、順番に値を保持しています。</p>
+
+<p><img src="images/04/list.png" alt="list.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li>重複を許可する</li>
+</ul>
+
+
+<h3>リストの作成</h3>
+
+<p>リストを作成する場合は、<code>[]</code>を使用します。</p>
+
+<pre><code class="python"># リストの作成
+points = [80, 75, 90, 100]
+
+# 空のリストの作成
+empty = []
+
+print(points) # [80, 75, 90, 100]
+</code></pre>
+
+<h3>リストの参照</h3>
+
+<p>リストの一つ一つの要素を参照するには、以下のようにインデックス番号を指定します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(points[0])  # 80
+print(points[1])  # 75
+print(points[-1]) # 100
+</code></pre>
+
+<p>リストのインデックスは0から始まることに注意してください。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>リストのスライス</h3>
+
+<p>リストの一部のみを切り出して別のリストを作成することができます。
+<code>[開始:終了:増分]</code>という指定をします。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+# 0から2までの値を1つおきに
+print(points[0:2:1])  # [80, 75]
+
+# 省略することもできます
+print(points[:2:])  # [80, 75]
+
+# 先頭から末尾まで2つおきに
+print(points[::2])  # [80, 90]
+</code></pre>
+
+<h3>要素の存在チェック</h3>
+
+<p>リストの要素に指定の値が存在するか調べることができます。
+<code>値 in リスト</code>という構文を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+exist10 = 10 in points
+exist75 = 75 in points
+
+print(exist10)  # False
+print(exist75)  # True
+</code></pre>
+
+<h3>リストの要素数</h3>
+
+<p>リストの長さ（要素数）を取得することができます。
+len関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(len(points))  # 4
+</code></pre>
+
+<h3>リストの最大値と最小値</h3>
+
+<p>リスト要素中の最大値を取得するには、max関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(max(points))  # 100
+</code></pre>
+
+<p>リスト要素中の最小値を取得するには、min関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(min(points))  # 75
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>リストのソート</h3>
+
+<p>リストの要素の順番を並び替えることができます。
+sorted関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(sorted(points)) # [75, 80, 90, 100]
+
+# 引数にreverse=Trueを指定すると降順になる
+print(sorted(points, reverse=True)) # [100, 90, 80, 75]
+</code></pre>
+
+<h3>要素の更新</h3>
+
+<p>リストの既存の要素を更新することができます。
+リストのインデックスで指定し、値を代入することで更新します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points[1] = 65
+
+print(points)  # [80, 65, 90, 100]
+</code></pre>
+
+<h3>要素の追加と削除</h3>
+
+<p>リストに要素を追加するには、appendメソッドを使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points.append("new element")
+
+print(points) # [80, 75, 90, 100, 'new element']
+</code></pre>
+
+<p>appendメソッドは末尾に要素を追加しますが、間に挿入することもできます。その場合は、insertメソッドを使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+# 第一引数：要素番号
+# 第二引数：値
+points.insert(2, "new element")
+
+print(points) # [80, 75, 'new element', 90, 100]
+</code></pre>
+
+<p>リストの要素を削除するにはremoveメソッド、またはdel文を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points.remove(75)
+
+print(points) # [80, 90, 100]
+
+del points[1]
+
+print(points) # [80, 100]
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>タプル</h2>
+
+<p>タプルは複数の要素から構成され、順番に値を保持しています。
+リストとほぼ同様の機能を有しています。</p>
+
+<p><img src="images/04/list.png" alt="list.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>重複を許可する</li>
+<li><strong>要素の追加、変更、削除ができない</strong></li>
+</ul>
+
+
+<p>変更の必要がないようなデータはタプルで扱うのが好ましいでしょう。</p>
+
+<h3>タプルの作成</h3>
+
+<p>タプルを作成する場合は<code>()</code>を使用します。</p>
+
+<pre><code class="python"># タプルの作成
+points = (80, 75, 90, 100)
+
+print(points) # (80, 75, 90, 100)
+
+# 削除しようとするとエラーとなる
+# points.remove(75)
+</code></pre>
+
+<h3>タプルの参照</h3>
+
+<p>タプルの一つ一つの要素を参照するには、リストと同じようにインデックス番号を指定します。</p>
+
+<pre><code class="python">points = (80, 75, 90, 100)
+
+print(points[0])  # 80
+print(points[1])  # 75
+print(points[-1]) # 100
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>タプルとリスト相互作成</h3>
+
+<p>タプルからリストを新しく作り出すことができます。
+その場合は、list関数を使用します。</p>
+
+<pre><code class="python">points = (80, 75, 90, 100)
+
+points_list = list(points)
+
+print(points_list)  # [80, 75, 90, 100]
+print(type(points_list))  # &lt;class 'list'&gt;
+</code></pre>
+
+<p>逆にリストからタプルを新しく作り出すこともできます。
+その場合は、tuple関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points_tuple = tuple(points)
+
+print(points_tuple)  # (80, 75, 90, 100)
+print(type(points_tuple))  # &lt;class 'tuple'&gt;
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>セット</h2>
+
+<p>セットは複数のユニークな要素から構成され、順番は保持しません。
+リストとほぼ同様の機能を有しています。</p>
+
+<p><img src="images/04/set.png" alt="set.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li><strong>重複を許可しない</strong></li>
+<li><strong>順番を保証しない</strong></li>
+</ul>
+
+
+<h3>セットの作成</h3>
+
+<p>セットを作成する場合は、<code>{}</code>を使用します。</p>
+
+<pre><code class="python"># セットの作成
+points = {80, 75, 90, 100}
+
+# 空のセット {}では空のディクショナリになる
+empty = set()
+
+# 順番が作成時と異なる
+print(points)  # {80, 90, 75, 100}
+</code></pre>
+
+<h3>セットの参照</h3>
+
+<p>順番を保持していないため、リストやタプルのようにインデックスを利用した個別参照はできません。
+セットの値を参照したい場合はfor文を使用して全要素を取得する必要があります。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+for point in points :
+  print(point)
+
+# 80
+# 90
+# 75
+# 100
+</code></pre>
+
+<blockquote><p>for文については次章にて詳しく解説します。</p></blockquote>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>セットの追加と削除</h3>
+
+<p>セットの追加をする場合は、addメソッドを使用します。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+points.add("new element")
+# 重複する値を追加しても無視される
+points.add(80)
+
+print(points) # {100, 75, 'new element', 80, 90}
+</code></pre>
+
+<p>セットを削除する場合は、removeメソッドを使用します。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+points.remove(75)
+
+print(points) # {100, 80, 90}
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>ディクショナリ</h2>
+
+<p>ディクショナリは複数の値とキーを組み合わせた要素から構成され、順番は保証されません。</p>
+
+<p><img src="images/04/dic.png" alt="dic.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li><strong>キーは重複を許可しない</strong></li>
+<li><strong>順番を保証しない</strong></li>
+</ul>
+
+
+<h3>ディクショナリの作成</h3>
+
+<p>ディクショナリを作成する場合は、<code>{key:value}</code>を使用します。</p>
+
+<pre><code class="python"># ディクショナリの作成
+points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points) # {'math': 80, 'english': 75, 'science': 90, 'history': 100}
+</code></pre>
+
+<h3>ディクショナリの参照</h3>
+
+<p>ディクショナリの要素を参照する場合は、キーを指定します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points["math"])    # 80
+print(points["history"]) # 100
+
+# 存在しないキーを参照しようとするとエラーとなる
+# print(points["geographic"])
+</code></pre>
+
+<p>他にもgetメソッドを使用する方法があります。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points.get("english"))       # 75
+# 取得できない場合はNoneとなる
+print(points.get("geographic"))    # None
+# 第二引数に値を設定することで、存在しない場合にその値を返す
+print(points.get("geographic", 0)) # 0
+</code></pre>
+
+<p>また、キーの一覧や、値の一覧を取得することもできます。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+keys = points.keys()
+values = points.values()
+
+print(keys)     # dict_keys(['math', 'english', 'science', 'history'])
+print(values)   # dict_values([80, 75, 90, 100])
+</code></pre>
+
+<p>キーと値をタプル形式で取得したい場合は、itemsメソッドを使用します。
+```python
+points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}</p>
+
+<p>items = points.items()</p>
+
+<p>print(items)  # dict_items([('math', 80), ('english', 75), ('science', 90), ('history', 100)])
+```</p>
+
+<h3>要素の更新</h3>
+
+<p>ディクショナリの要素を更新する場合は、キーを指定し、新しい要素を代入します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+points["math"] = 95
+
+print(points)  # {'math': 95, 'english': 75, 'science': 90, 'history': 100}
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>要素の追加と削除</h3>
+
+<p>ディクショナリの要素を追加する場合は、新しいキーを指定し、要素を代入します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+points["geographic"] = 95
+
+print(points)  # {'math': 80, 'english': 75, 'science': 90, 'history': 100, 'geographic': 95}
+</code></pre>
+
+<p>ディクショナリの要素を削除する場合は、del文を使用します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+del points["english"]
+
+print(points)  # {'math': 80, 'science': 90, 'history': 100, 'geographic': 95}
+</code></pre>

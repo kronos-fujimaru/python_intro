@@ -1,0 +1,3235 @@
+<html>
+<head>
+  <title>Python 入門</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://gist.githubusercontent.com/murayama333/e65e8867d684648577ba/raw/c2c9ebc77fe403f100894d644838211fb3ef6153/gist.css" type="text/css">
+</head>
+<body>
+
+<h1>1章Python概要</h1>
+
+<p>この章ではPythonの概要について学習します。</p>
+
+<h2>Pythonとは</h2>
+
+<p>Pythonとは、オランダ人のグイド・ヴァンロッサムによって開発されたオープンソースのオブジェクト指向スクリプト言語です。</p>
+
+<h2>Pythonの特徴</h2>
+
+<p>Pythonには一般的に以下の特徴があります。</p>
+
+<ol>
+<li>オブジェクト指向</li>
+<li>インタプリタ</li>
+<li>マルチプラットフォーム</li>
+<li>シンプルな構文</li>
+</ol>
+
+
+<h3>1.オブジェクト指向</h3>
+
+<p>オブジェクトとは、世の中に存在するモノ、コトを表し、属性（データ）と処理を持ちます。属性や処理をオブジェクトとしてまとめて扱うことで<strong>可読性</strong>や<strong>拡張性</strong>などを高めることができます。</p>
+
+<p><img src="images/01/oop.png" alt="oop" /></p>
+
+<h3>2.インタプリタ</h3>
+
+<p>プログラムは人間がコンピュータに出す命令なので人間の言葉で記述されますが、コンピュータは人間の言葉を読み取れません。そのため、機械語と呼ばれるコンピュータが読み取れる言語に翻訳する必要があります。</p>
+
+<p><strong>[コンパイラ型言語の場合]</strong><br/>
+C言語などのコンパイラ型言語はプログラムをコンパイルという作業を通して機械語に翻訳します。以下の内容で'hello.c'というファイルを作成します。</p>
+
+<pre><code class="c">#include "stdio.h"
+
+int main(int argc, char const *argv[]) {
+  printf("Hello World!");
+  return 0;
+}
+</code></pre>
+
+<p>プログラミング後、コンパイルを行います。</p>
+
+<pre><code>% gcc -o hello hello.c
+</code></pre>
+
+<p>コンパイルして作成された機械語のファイルを指定して実行します。</p>
+
+<pre><code>% ./hello
+  Hello World!
+</code></pre>
+
+<p><strong>[インタプリタ型言語の場合]</strong><br/>
+インタプリタ型は実行しながら1行ずつ翻訳します。以下の内容で<code>hello.py</code>というファイルを作成します。</p>
+
+<pre><code class="python">print("Hello World!")
+</code></pre>
+
+<p>プログラミング後、すぐに実行することができます。</p>
+
+<pre><code>python hello.py
+Hello World!
+</code></pre>
+
+<p>このようにインタプリタ型の言語ではプログラミング後、簡単に実行することができます。簡単に実行できる反面、文法的なエラーなどがあった場合に、実行するまでわからないなどの欠点があります。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>3.マルチプラットフォーム</h3>
+
+<p>機械語はプラットフォームによって異なります。そのため、機械語に翻訳すると言ってもそれぞれの環境に合わせて翻訳する必要があります。Pythonでは<strong>PVM</strong>（Python Virtual Maichine）と呼ばれる仮想マシンを用いて、各プラットフォームの差を埋めています。</p>
+
+<p><img src="images/01/pvm.png" alt="pvm" /></p>
+
+<p>これにより、プラットフォームの違いを意識せずにPythonを扱うことができるようになっています。</p>
+
+<h3>4.シンプルな構文</h3>
+
+<p>Pythonの構文は非常にシンプルな構成となっております。Javaと比較してみましょう。</p>
+
+<p><strong>[Javaの場合]</strong></p>
+
+<pre><code class="java">public class Sample {
+  public static void main(String[] args) {
+
+    int age = 20;
+
+    if(age &lt; 20) {
+      System.out.println("You are not adult");
+    } else {
+      System.out.println("You are adult");
+    }
+  }
+}
+</code></pre>
+
+<p><strong>[Pythonの場合]</strong></p>
+
+<pre><code class="python">age = 20
+
+if(age &lt; 20):
+    print("You are not adult")
+else:
+    print("You are adult")
+</code></pre>
+
+<p>見比べるとPythonの構文には以下の特徴があることがわかると思います。</p>
+
+<ul>
+<li>コードブロックは<code>{}</code>ではなく、インデントで指定する</li>
+<li>セミコロンが不要（記述してもOK）</li>
+<li>変数の型を指定しない</li>
+</ul>
+
+
+<p>このようにPythonはシンプルに記述でき、シンプルに実行できることが特徴といえるでしょう。</p>
+<div style="page-break-before: always;"></div><h1>2章 Pythonの環境構築</h1>
+
+<p>この章ではPythonの環境構築について学習します。</p>
+
+<h2>Pythonのインストール</h2>
+
+<p>Pythonの公式サイトにアクセスします。<br/>
+https://www.python.org/</p>
+
+<p>公式サイトにアクセスすると、次のような画面が表示されます。メニューの[Downloads]をクリックすると、最新版のPythonが表示されるのでクリックします。</p>
+
+<p><img src="images/02/pydl1.png" alt="pydl1" /></p>
+
+<p>ダウンロードリンクが表示されるので、クリックしてダウンロードします。ここでは3.7をインストールしましょう。</p>
+
+<p><img src="images/02/pydl2.png" alt="pydl2" /></p>
+
+<p>ダウンロードしたファイルを実行すると、インストーラが起動します。[Add Python 3.7 to PATH]にチェックをいれ、[Install Now]をクリックします。</p>
+
+<p><img src="images/02/pyins1.png" width="50%"></p>
+
+<p>インストールが開始されるので、しばらく待ちます。</p>
+
+<p><img src="images/02/pyins2.png" width="50%"></p>
+
+<p>正常に終了したらCloseボタンをクリックして、インストーラを終了させます。</p>
+
+<p><img src="images/02/pyins3.png" width="50%"></p>
+
+<p>インストールが完了したら以下のコマンドを実行し、Pythonがインストールされたことを確認しましょう。</p>
+
+<pre><code>% python --version
+Python 3.7.1
+</code></pre>
+
+<p>これでPythonのインストールが完了しました。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>Pythonの起動</h2>
+
+<p>Pythonを実行するにはまず、ソースコードを作成する必要があります。<code>hello.py</code>というファイル名で、以下の内容を保存してください。</p>
+
+<pre><code class="python">print("Hello World!")
+</code></pre>
+
+<p>作成したソースコードは<code>python ソースコードのパス</code>で実行することができます。</p>
+
+<pre><code>% python sources/02/hello.py
+Hello World!
+</code></pre>
+
+<blockquote><p>print関数は、引数に渡された値を画面に出力します。</p></blockquote>
+
+<h2>Pythonインタプリタ</h2>
+
+<p>Pythonを実行するには、上記の方法の他にインタプリタ（REPL）を起動する方法があります。REPLとはRead-eval-print loopの略で、プログラムを読んで、評価して、出力するを繰り返すことを意味します。<code>python</code>コマンドで起動します。</p>
+
+<pre><code class="python">% python
+Python 3.7.1 (default, Nov 27 2018, 17:00:53)
+[Clang 10.0.0 (clang-1000.10.44.4)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; print("Hello World!")
+Hello World!
+</code></pre>
+
+<p>Pythonの動きを確認したい時などに重宝します。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>（補講）IPython</h2>
+
+<p>IPythonとは、デフォルトのPythonインタプリタを拡張したものです。pipというPyhtonのパッケージマネージャを使用します。</p>
+
+<pre><code>% pip install ipython
+</code></pre>
+
+<p>インストールが完了したら、<code>ipython</code>コマンドで起動します。</p>
+
+<pre><code class="python">% ipython
+Python 3.7.1 (default, Nov 27 2018, 17:00:53)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.1.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: print("Hello World!")
+Hello World!
+</code></pre>
+
+<p>IPythonにはデフォルトのPythonインタプリタには無い便利な機能がありますので、いくつか紹介します。
+- 補完機能
+- イントロスペクション
+- OSコマンド実行</p>
+
+<h3>補完機能</h3>
+
+<p>IPythonには入力補完機能があります。以下のように<code>pr</code>まで入力し、Tabキーを押下してください。</p>
+
+<pre><code class="python">In [2]: pr
+</code></pre>
+
+<p>候補がいくつか表示されます。さらにTabキーを押下して、<code>print</code>にフォーカスがあたったら、Enterキーで選択します。万一、キーワードや関数名を忘れてしまっても安心です。また、関数名が長い場合などは入力補助にも使用することができます。</p>
+
+<h3>イントロスペクション</h3>
+
+<p>イントロスペクションは変数や関数の情報を出力させることができます。関数名や変数名の後に<code>?</code>を入力して実行します。</p>
+
+<pre><code class="python">In [2]: print?
+Docstring:
+print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+Prints the values to a stream, or to sys.stdout by default.
+Optional keyword arguments:
+file:  a file-like object (stream); defaults to the current sys.stdout.
+sep:   string inserted between values, default a space.
+end:   string appended after the last value, default a newline.
+flush: whether to forcibly flush the stream.
+Type:      builtin_function_or_method
+</code></pre>
+
+<p>変数の情報も確認してみましょう。</p>
+
+<pre><code class="python">In [4]: message?
+Type:        str
+String form: Hello World!
+Length:      12
+Docstring:
+str(object='') -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str
+
+Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+</code></pre>
+
+<p>デバッグ時などに重宝する機能です。</p>
+
+<h3>OSコマンド実行</h3>
+
+<p>IPythonを起動したまま、OSコマンドを実行することができます。<code>!</code>をOSコマンドの先頭に入力して実行します。</p>
+
+<pre><code class="python">n [2]: !ping python.org
+PING python.org (23.253.135.79): 56 data bytes
+64 bytes from 23.253.135.79: icmp_seq=0 ttl=39 time=186.576 ms
+64 bytes from 23.253.135.79: icmp_seq=1 ttl=39 time=186.833 ms
+64 bytes from 23.253.135.79: icmp_seq=2 ttl=39 time=186.496 ms
+</code></pre>
+<div style="page-break-before: always;"></div><h1>3章 基本文法</h1>
+
+<p>この章ではPythonの基本文法について学習します。</p>
+
+<h2>コメント</h2>
+
+<p>コメントはプログラムとして評価されない文章で、ソースコードの説明などに使用します。
+Pythonでコメントをつけるときは<code>#</code>を使用します。2章で作成した<code>hello.py</code>にコメントをつけてみましょう。</p>
+
+<pre><code class="python"># greeting
+print("Hello Wolrd!")
+</code></pre>
+
+<p>ファイルを作成したら実行します。</p>
+
+<pre><code>% python sources/03/hello.py
+Hello World!
+</code></pre>
+
+<p>出力結果に何も変化がないことがわかると思います。</p>
+
+<p>また、複数行のコメントを描きたい場合は、<code>'''</code>で囲みます。</p>
+
+<pre><code class="python">'''
+greeting
+to You
+'''
+print("Hello World!")
+</code></pre>
+
+<p>コメント機能は開発者がソースコード上で取れる数少ないコミュニケーションの一つです。
+使用上の注意点やソースの意図の説明など、効果的なコメントを残すことを心がけるようにしましょう。</p>
+
+<h2>演算子</h2>
+
+<p>Pythonには主に以下の演算子があります。</p>
+
+<ul>
+<li>算術演算子</li>
+<li>比較演算子</li>
+<li>論理演算子</li>
+</ul>
+
+
+<h3>算術演算子</h3>
+
+<p>算術演算子は計算をするための記号です。</p>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>加算、文字列結合</td>
+</tr>
+<tr>
+<td>-</td>
+<td>減算</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乗算</td>
+</tr>
+<tr>
+<td>/</td>
+<td>浮動小数点の除算</td>
+</tr>
+<tr>
+<td>//</td>
+<td>整数の除算（切り捨て）</td>
+</tr>
+<tr>
+<td>%</td>
+<td>剰余算</td>
+</tr>
+<tr>
+<td>**</td>
+<td>指数</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>実際に計算してみましょう。</p>
+
+<pre><code class="python">print(2 + 3)  # 5
+print(3 - 2)  # 1
+print(3 * 2)  # 6
+print(3 / 2)  # 1.5
+print(3 // 2) # 1
+print(3 % 2)  # 1
+print(3 ** 2) # 9
+print("Hello" + " World!")  # Hello World!
+</code></pre>
+
+<p>Pythonで算術演算子を扱う場合、ひとつ注意点があります。
++演算子を使って、<strong>数値と文字列の結合はできない</strong> ということです。
+他の言語では可能である場合もあるので注意しましょう。</p>
+
+<pre><code class="python"># エラーが発生する
+# print("1 + 1 = " + 1 + 1)
+
+# 数値を文字列に変換した上で、文字列結合する
+print("1 + 1 = " + str(1 + 1))
+</code></pre>
+
+<blockquote><p>Pythonには、インクリメント、デクリメント演算子もありませんので、注意してください。</p></blockquote>
+
+<h3>比較演算子</h3>
+
+<p>比較演算子は比較をするための記号です。比較結果は論理値で返されます。</p>
+
+<blockquote><p>論理値とは真偽を表す値で、TrueまたはFalseが定められています。</p></blockquote>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;</td>
+<td>小なり</td>
+</tr>
+<tr>
+<td>></td>
+<td>大なり</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>以下</td>
+</tr>
+<tr>
+<td>>=</td>
+<td>以上</td>
+</tr>
+<tr>
+<td>==</td>
+<td>等しい</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>等しくない</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>実際に比較してみましょう。</p>
+
+<pre><code class="python">print(3 &lt; 2)  # False
+print(3 &gt; 2)  # True
+print(3 &lt;= 2) # False
+print(3 &gt;= 2) # True
+print(2 == 2) # True
+print(3 != 2) # True
+print("Hello" == "Hello") # True
+</code></pre>
+
+<p>Pythonでは異なる型の値の比較はFalseになります。</p>
+
+<pre><code class="python">print(1 == '1')  # False
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>論理演算子</h3>
+
+<p>論理演算子は、真偽を組み合わせた結果を論理値で返します。</p>
+
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>and</td>
+<td>かつ</td>
+</tr>
+<tr>
+<td>or</td>
+<td>または</td>
+</tr>
+<tr>
+<td>not</td>
+<td>否定</td>
+</tr>
+</tbody>
+</table>
+
+
+<pre><code class="python">print(True and True)  # True
+print(True and False) # False
+print(True or True)   # True
+print(True or False)  # True
+print(not True)       # False
+print(not False)      # True
+</code></pre>
+
+<p>論理演算子は多くの場合、比較演算子と組み合わせて使用されます。</p>
+
+<pre><code class="python">print(3 &gt; 2 and 4 &gt; 5)  # False
+</code></pre>
+
+<h2>変数</h2>
+
+<p>変数とは、プログラムで扱われるデータを一定期間記憶し、必要なときに利用可能にするデータ格納場所に名前をつけたものです。[変数名 = 値]という書き方で値を代入します。</p>
+
+<pre><code class="python"># 変数名 = 値
+age = 20
+</code></pre>
+
+<p><code>age</code>という名前の箱に20という値を代入したとイメージするとわかりやすいと思います。</p>
+
+<p><img src="images/03/val.png" alt="val.png" /></p>
+
+<p>変数を使用する時は、変数名をそのまま指定します。</p>
+
+<pre><code class="python">age = 20
+
+print(age)  # 20
+</code></pre>
+
+<h2>予約語</h2>
+
+<p>予約語とは、プログラミング言語の仕様で意味が定められ、変数名や関数名として利用できない単語のことです。
+Pythonでは以下の予約語があります。</p>
+
+<pre><code>False, None, True, and, as, assert, break, class, continue, def, del, elif, else, except, finally,
+for, from, global, if, import, in, is, lambda, nonlocal, not, or, pass, raise, return, try, while,
+with, yield など
+</code></pre>
+
+<p>例えば以下のようにするとエラーとなります。</p>
+
+<pre><code class="python">and = 10
+
+print(and)
+</code></pre>
+<div style="page-break-before: always;"></div><h1>4章 データ型</h1>
+
+<p>この章ではPythonのデータ型について学習します。</p>
+
+<h2>データ型の種類</h2>
+
+<p><code>1</code>や<code>"Hello World!"</code>というようなデータには型があります。
+例えば'1'は整数型、"Hello World!"は文字列型です。
+全体像としては以下の図のようになっています。</p>
+
+<p><img src="images/04/datatype.png" width="70%"></p>
+
+<p>文字列と数値は結合できなかったりと、データ型を意識しながらプログラミングしていくことはとても大切になっていきます。</p>
+
+<h2>数値型</h2>
+
+<p>数値型は以下の3種類に分けることができます。</p>
+
+<ul>
+<li>整数型（int）</li>
+<li>論理型（boolean）</li>
+<li>浮動小数点型（float）</li>
+</ul>
+
+
+<blockquote><p>複素数は当テキストでは扱いません。</p></blockquote>
+
+<h3>整数型（int)</h3>
+
+<p>整数型は離散数値を表します。</p>
+
+<pre><code class="python">i1 = 10
+i2 = -4
+
+print(type(i1)) # &lt;class 'int'&gt;
+print(type(i2)) # &lt;class 'int'&gt;
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>論理型（boolean）</h3>
+
+<p>論理型は真偽値（True or False）のことです。
+Pythonでは数値を真偽値と同じ物として扱います。</p>
+
+<pre><code class="python">print(0 == False)   # True
+print(1 == True)    # True
+print(2 == True)    # False
+</code></pre>
+
+<p>他言語とは仕様が異なる場合があるので注意しましょう。</p>
+
+<h3>浮動小数点型（float）</h3>
+
+<p>浮動小数点型は小数値を表します。</p>
+
+<pre><code class="python">f1 = 0.5
+f2 = - 1 / 3
+
+print(type(f1)) # &lt;class 'float'&gt;
+print(type(f2)) # &lt;class 'float'&gt;
+</code></pre>
+
+<h4>丸め誤差について</h4>
+
+<p>コンピュータでは<code>0.3333...</code>のような循環小数や、とても小さい数を正確に扱うことができません。そういう値を扱う場合は、<strong>近似値</strong> を使用します。そのため、小さい小数値を扱う場合、計算結果に誤差が生じる可能性があることを留意しておいてください。</p>
+
+<pre><code class="python">f1 = 10 / 3
+
+print(f1)   # 3.3333333333333335
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>文字列型（str）</h2>
+
+<p>文字列型を扱うには<code>"（ダブルクォーテーション）</code>または、<code>'（シングルクォーテーション）</code>で囲みます。</p>
+
+<pre><code class="python">first_name = "Taro"
+last_name = 'Sato'
+
+print(type(first_name)) # &lt;class 'str'&gt;
+print(type(last_name))  # &lt;class 'str'&gt;
+</code></pre>
+
+<p>他の言語ではダブルクォーテーションとシングルクォーテーションを区別することもありますが、Pythonでは同一に扱います。</p>
+
+<p>基本的にはプログラム内で統一すると良いでしょう。
+ただし、文字列内でダブルクォーテーションを使いたい、または、シングルクォーテーションを使いたい場合は、別のほうを使用することで上手に処理することができます。</p>
+
+<pre><code class="python"># 以下のように書くと文字列の終了が正常に機能しない。
+message = 'Hello, 'Python'.'
+
+# ダブルクォーテーションを使用することで、対応できる。
+message = "Hello, 'Python'."
+</code></pre>
+
+<h3>エスケープシーケンス</h3>
+
+<p><code>/（バックスラッシュ）</code>を使用することで、文字の意味を消去することができます。</p>
+
+<pre><code class="python">message = 'Hello, \'Python\'.'
+print(message) # Hello, 'Python'.
+</code></pre>
+
+<p>シングルクォーテーションの前にバックスラッシュをつけることで、シングルクォーテーションは意味を失い、ただの文字列として扱うことができました。</p>
+
+<blockquote><p>Windowsの場合はバックスラッシュではなく、¥を使用します。</p></blockquote>
+
+<h2>None型</h2>
+
+<p>None型は少し特殊で、オブジェクトが存在しないことを意味します。</p>
+
+<pre><code class="python">n = None
+
+print(n)       # None
+print(type(n)) # &lt;class 'NoneType'&gt;
+</code></pre>
+
+<blockquote><p>他言語では多くの場合、nullと表現されます。</p></blockquote>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>リスト</h2>
+
+<p>リストは複数の要素から構成され、順番に値を保持しています。</p>
+
+<p><img src="images/04/list.png" alt="list.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li>重複を許可する</li>
+</ul>
+
+
+<h3>リストの作成</h3>
+
+<p>リストを作成する場合は、<code>[]</code>を使用します。</p>
+
+<pre><code class="python"># リストの作成
+points = [80, 75, 90, 100]
+
+# 空のリストの作成
+empty = []
+
+print(points) # [80, 75, 90, 100]
+</code></pre>
+
+<h3>リストの参照</h3>
+
+<p>リストの一つ一つの要素を参照するには、以下のようにインデックス番号を指定します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(points[0])  # 80
+print(points[1])  # 75
+print(points[-1]) # 100
+</code></pre>
+
+<p>リストのインデックスは0から始まることに注意してください。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>リストのスライス</h3>
+
+<p>リストの一部のみを切り出して別のリストを作成することができます。
+<code>[開始:終了:増分]</code>という指定をします。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+# 0から2までの値を1つおきに
+print(points[0:2:1])  # [80, 75]
+
+# 省略することもできます
+print(points[:2:])  # [80, 75]
+
+# 先頭から末尾まで2つおきに
+print(points[::2])  # [80, 90]
+</code></pre>
+
+<h3>要素の存在チェック</h3>
+
+<p>リストの要素に指定の値が存在するか調べることができます。
+<code>値 in リスト</code>という構文を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+exist10 = 10 in points
+exist75 = 75 in points
+
+print(exist10)  # False
+print(exist75)  # True
+</code></pre>
+
+<h3>リストの要素数</h3>
+
+<p>リストの長さ（要素数）を取得することができます。
+len関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(len(points))  # 4
+</code></pre>
+
+<h3>リストの最大値と最小値</h3>
+
+<p>リスト要素中の最大値を取得するには、max関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(max(points))  # 100
+</code></pre>
+
+<p>リスト要素中の最小値を取得するには、min関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(min(points))  # 75
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>リストのソート</h3>
+
+<p>リストの要素の順番を並び替えることができます。
+sorted関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+print(sorted(points)) # [75, 80, 90, 100]
+
+# 引数にreverse=Trueを指定すると降順になる
+print(sorted(points, reverse=True)) # [100, 90, 80, 75]
+</code></pre>
+
+<h3>要素の更新</h3>
+
+<p>リストの既存の要素を更新することができます。
+リストのインデックスで指定し、値を代入することで更新します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points[1] = 65
+
+print(points)  # [80, 65, 90, 100]
+</code></pre>
+
+<h3>要素の追加と削除</h3>
+
+<p>リストに要素を追加するには、appendメソッドを使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points.append("new element")
+
+print(points) # [80, 75, 90, 100, 'new element']
+</code></pre>
+
+<p>appendメソッドは末尾に要素を追加しますが、間に挿入することもできます。その場合は、insertメソッドを使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+# 第一引数：要素番号
+# 第二引数：値
+points.insert(2, "new element")
+
+print(points) # [80, 75, 'new element', 90, 100]
+</code></pre>
+
+<p>リストの要素を削除するにはremoveメソッド、またはdel文を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points.remove(75)
+
+print(points) # [80, 90, 100]
+
+del points[1]
+
+print(points) # [80, 100]
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>タプル</h2>
+
+<p>タプルは複数の要素から構成され、順番に値を保持しています。
+リストとほぼ同様の機能を有しています。</p>
+
+<p><img src="images/04/list.png" alt="list.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>重複を許可する</li>
+<li><strong>要素の追加、変更、削除ができない</strong></li>
+</ul>
+
+
+<p>変更の必要がないようなデータはタプルで扱うのが好ましいでしょう。</p>
+
+<h3>タプルの作成</h3>
+
+<p>タプルを作成する場合は<code>()</code>を使用します。</p>
+
+<pre><code class="python"># タプルの作成
+points = (80, 75, 90, 100)
+
+print(points) # (80, 75, 90, 100)
+
+# 削除しようとするとエラーとなる
+# points.remove(75)
+</code></pre>
+
+<h3>タプルの参照</h3>
+
+<p>タプルの一つ一つの要素を参照するには、リストと同じようにインデックス番号を指定します。</p>
+
+<pre><code class="python">points = (80, 75, 90, 100)
+
+print(points[0])  # 80
+print(points[1])  # 75
+print(points[-1]) # 100
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>タプルとリスト相互作成</h3>
+
+<p>タプルからリストを新しく作り出すことができます。
+その場合は、list関数を使用します。</p>
+
+<pre><code class="python">points = (80, 75, 90, 100)
+
+points_list = list(points)
+
+print(points_list)  # [80, 75, 90, 100]
+print(type(points_list))  # &lt;class 'list'&gt;
+</code></pre>
+
+<p>逆にリストからタプルを新しく作り出すこともできます。
+その場合は、tuple関数を使用します。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+points_tuple = tuple(points)
+
+print(points_tuple)  # (80, 75, 90, 100)
+print(type(points_tuple))  # &lt;class 'tuple'&gt;
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>セット</h2>
+
+<p>セットは複数のユニークな要素から構成され、順番は保持しません。
+リストとほぼ同様の機能を有しています。</p>
+
+<p><img src="images/04/set.png" alt="set.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li><strong>重複を許可しない</strong></li>
+<li><strong>順番を保証しない</strong></li>
+</ul>
+
+
+<h3>セットの作成</h3>
+
+<p>セットを作成する場合は、<code>{}</code>を使用します。</p>
+
+<pre><code class="python"># セットの作成
+points = {80, 75, 90, 100}
+
+# 空のセット {}では空のディクショナリになる
+empty = set()
+
+# 順番が作成時と異なる
+print(points)  # {80, 90, 75, 100}
+</code></pre>
+
+<h3>セットの参照</h3>
+
+<p>順番を保持していないため、リストやタプルのようにインデックスを利用した個別参照はできません。
+セットの値を参照したい場合はfor文を使用して全要素を取得する必要があります。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+for point in points :
+  print(point)
+
+# 80
+# 90
+# 75
+# 100
+</code></pre>
+
+<blockquote><p>for文については次章にて詳しく解説します。</p></blockquote>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>セットの追加と削除</h3>
+
+<p>セットの追加をする場合は、addメソッドを使用します。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+points.add("new element")
+# 重複する値を追加しても無視される
+points.add(80)
+
+print(points) # {100, 75, 'new element', 80, 90}
+</code></pre>
+
+<p>セットを削除する場合は、removeメソッドを使用します。</p>
+
+<pre><code class="python">points = {80, 75, 90, 100}
+
+points.remove(75)
+
+print(points) # {100, 80, 90}
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>ディクショナリ</h2>
+
+<p>ディクショナリは複数の値とキーを組み合わせた要素から構成され、順番は保証されません。</p>
+
+<p><img src="images/04/dic.png" alt="dic.png" /></p>
+
+<p>以下のような特徴があります。</p>
+
+<ul>
+<li>どのような型でも格納できる</li>
+<li>異なる型でも同時に格納できる</li>
+<li>可変長である</li>
+<li><strong>キーは重複を許可しない</strong></li>
+<li><strong>順番を保証しない</strong></li>
+</ul>
+
+
+<h3>ディクショナリの作成</h3>
+
+<p>ディクショナリを作成する場合は、<code>{key:value}</code>を使用します。</p>
+
+<pre><code class="python"># ディクショナリの作成
+points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points) # {'math': 80, 'english': 75, 'science': 90, 'history': 100}
+</code></pre>
+
+<h3>ディクショナリの参照</h3>
+
+<p>ディクショナリの要素を参照する場合は、キーを指定します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points["math"])    # 80
+print(points["history"]) # 100
+
+# 存在しないキーを参照しようとするとエラーとなる
+# print(points["geographic"])
+</code></pre>
+
+<p>他にもgetメソッドを使用する方法があります。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+print(points.get("english"))       # 75
+# 取得できない場合はNoneとなる
+print(points.get("geographic"))    # None
+# 第二引数に値を設定することで、存在しない場合にその値を返す
+print(points.get("geographic", 0)) # 0
+</code></pre>
+
+<p>また、キーの一覧や、値の一覧を取得することもできます。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+keys = points.keys()
+values = points.values()
+
+print(keys)     # dict_keys(['math', 'english', 'science', 'history'])
+print(values)   # dict_values([80, 75, 90, 100])
+</code></pre>
+
+<p>キーと値をタプル形式で取得したい場合は、itemsメソッドを使用します。
+```python
+points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}</p>
+
+<p>items = points.items()</p>
+
+<p>print(items)  # dict_items([('math', 80), ('english', 75), ('science', 90), ('history', 100)])
+```</p>
+
+<h3>要素の更新</h3>
+
+<p>ディクショナリの要素を更新する場合は、キーを指定し、新しい要素を代入します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+points["math"] = 95
+
+print(points)  # {'math': 95, 'english': 75, 'science': 90, 'history': 100}
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>要素の追加と削除</h3>
+
+<p>ディクショナリの要素を追加する場合は、新しいキーを指定し、要素を代入します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+points["geographic"] = 95
+
+print(points)  # {'math': 80, 'english': 75, 'science': 90, 'history': 100, 'geographic': 95}
+</code></pre>
+
+<p>ディクショナリの要素を削除する場合は、del文を使用します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+del points["english"]
+
+print(points)  # {'math': 80, 'science': 90, 'history': 100, 'geographic': 95}
+</code></pre>
+<div style="page-break-before: always;"></div><h1>5章 制御構文</h1>
+
+<p>この章では制御構文について学習します。</p>
+
+<h2>条件分岐</h2>
+
+<p>条件分岐とは条件によって処理内容を変更する仕組みです。</p>
+
+<h3>if</h3>
+
+<p>条件分岐をさせたい場合は、if文を使用します。</p>
+
+<pre><code class="python">point = 65
+
+if(point &gt; 60):
+  # pointが60より大きい時のみ実行される
+  print("success")
+</code></pre>
+
+<h3>if-else</h3>
+
+<p>if-else文を使用することで、条件が真の時の処理と、偽の時の処理をそれぞれ記述することができます。</p>
+
+<pre><code class="python">point = 65
+
+if(point &gt; 60):
+  # pointが60より大きい時のみ実行される
+  print("success")
+else:
+  # pointが60以下の時のみ実行される
+  print("fail")
+</code></pre>
+
+<h3>elif</h3>
+
+<p>elif文を使用することで、分岐条件を追加することができます。</p>
+
+<pre><code class="python">point = 55
+
+if(point &gt; 80):
+  # pointが80より大きい時のみ実行される
+  print("success")
+
+elif(point &gt; 60):
+  # pointが80以下で、かつ、60より大きい時のみ実行される
+  print("good")
+
+else:
+  # pointが80以下で、かつ、60以下の時のみ実行される
+  print("fail")
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>繰り返し</h2>
+
+<p>繰り返しとは同じ処理を繰り返す仕組みです。</p>
+
+<h3>while文</h3>
+
+<p>繰り返しをしたい場合はwhile文条件に一致する内は、同じ処理を繰り返すことができます。</p>
+
+<pre><code class="python">count = 0
+
+while(count &lt; 5):
+  # countが5になるまで繰り返す
+  count += 1
+  print(count)
+</code></pre>
+
+<h4>continue</h4>
+
+<p>while文中に<code>continue</code>を記述すると、以降の処理はスキップされ、次の繰り返しが開始されます。</p>
+
+<pre><code class="python">count = 0
+
+while(count &lt; 5):
+  count += 1
+  if(count == 2):
+    continue
+
+  # countが2の時はスキップされる
+  print(count)
+</code></pre>
+
+<h4>break</h4>
+
+<p>while文中に<code>break</code>を記述すると、繰り返しを終了させることができます。</p>
+
+<pre><code class="python">count = 0
+
+while(count &lt; 10):
+  count += 1
+  if(count == 2):
+    # countが2のときに繰り返しを終了する（以降は繰り返されない）
+    break
+
+  print(count)
+</code></pre>
+
+<h4>while-else</h4>
+
+<p>while-else文を使用することで、while文が正常終了した時に処理を追加することができます。
+正常終了とはbreakを使わずに終了することを表します。</p>
+
+<pre><code class="python">count = 0
+
+while(count &lt; 4):
+  count += 1
+  if(count == 5):
+    break
+
+  print(count)
+else:
+  # whileが正常終了した場合に、実行される
+  print("success")
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>for文</h3>
+
+<p>for文を使うと繰り返し可能なオブジェクトの要素数の数だけ、同じ処理を繰り返すことができます。
+繰り返し可能なオブジェクトにはリスト、タプル、ディクショナリ、セット、文字列などがあります。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+for point in points :
+  # pointsの要素数の回数だけ繰り返される
+  # pointにはpointsの要素が順番に代入される
+  print(point)
+</code></pre>
+
+<h4>continue</h4>
+
+<p>for文中に<code>continue</code>を記述すると、以降の処理はスキップされ、次の繰り返しが開始されます。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+for point in points.items():
+  if(point[0] == "english"):
+    continue
+
+  # englishの時、スキップされる
+  print(point)
+</code></pre>
+
+<h4>break</h4>
+
+<p>for文中に<code>break</code>を記述すると、繰り返しを終了させることができます。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+for point in points.items():
+  if(point[1] == 90):
+    # 90がある時に、繰り返しを終了する
+    break
+
+  print(point)
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h4>for-else</h4>
+
+<p>for-else文を使用することで、for文が正常終了した時に処理を追加することができます。
+正常終了とはbreakを使わずに終了することを表します。</p>
+
+<pre><code class="python">points = {"math" : 80,
+          "english" : 75,
+          "science" : 90,
+          "history" : 100}
+
+for point in points.items():
+  if(point[1] == 85):
+    break
+
+  print(point)
+else:
+  # forが正常終了した場合に、実行される
+  print("success")
+</code></pre>
+
+<h4>range関数</h4>
+
+<p>range関数は、数値シーケンスを生成してくれます。</p>
+
+<pre><code class="python"># 1-9まで出力する
+for i in range(1, 10):
+  print(i)
+</code></pre>
+<div style="page-break-before: always;"></div><h1>6章 関数</h1>
+
+<p>この章では関数について学習します。</p>
+
+<h2>関数とは</h2>
+
+<p>関数とは処理のかたまりに名前をつけたものです。
+名前を"呼び出す"ことによって何度でも処理を実行させることができます。</p>
+
+<h2>関数の定義</h2>
+
+<p>関数の定義には<code>def</code>を使用します。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+</code></pre>
+
+<p>関数は定義するだけでは実行されません。
+関数を実行するには関数を"呼び出す"必要があります。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+#関数呼び出し
+greet()  # Hello
+greet()  # Hello
+</code></pre>
+
+<h2>引数</h2>
+
+<p>関数には引数を指定することができます。
+引数とは呼び出し側から関数へ値を受け渡す仕組みです。</p>
+
+<pre><code class="python">def add(x, y):
+  print(x + y)
+
+add(1, 2)   # 3
+add(2, -3)  # -1
+</code></pre>
+
+<h2>戻り値</h2>
+
+<p>関数には戻り値を指定することができます。
+戻り値とは関数から呼び出し側へ値を返す仕組みです。</p>
+
+<pre><code class="python">def add(x, y):
+  return x + y
+
+result1 = add(1, 2)
+result2 = add(2, -3)
+
+print(result1)  # 3
+print(result2)  # -1
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>高度な引数利用</h2>
+
+<h3>引数のデフォルト値</h3>
+
+<p>引数にデフォルト値を定義することができます。</p>
+
+<pre><code class="python">def greet(hour=8):
+  if(hour &gt;= 6 and hour &lt; 12):
+    return 'Good Morning'
+  elif(hour &gt;=12 and hour &lt; 18):
+    return "Hello"
+  else:
+    return "Good Evening"
+
+
+print(greet()) # Good Morning
+print(greet(14))  # Hello
+</code></pre>
+
+<h3>キーワード付き引数</h3>
+
+<p>引数受け渡し時に、引数名を指定して値を渡すことができます。</p>
+
+<pre><code class="python">def add(x=10, y= 0):
+  return x + y
+
+print(add(y=100))  # 110
+print(add(x=20, y=10))  # 30
+</code></pre>
+
+<h3>引数をタプル形式で受け取る</h3>
+
+<p><code>*</code>を使用し、0個以上の値をタプル形式で受け取ることができます。</p>
+
+<pre><code class="python">def add(*elements):
+  print(elements)
+  result = 0
+  for element in elements:
+    result += element
+
+  return result
+
+result1 = add(10, 10, 20, 30)
+result2 = add(10, 10)
+
+print(result1)  # 70
+print(result2)  # 20
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>引数をディクショナリ形式で受け取る</h3>
+
+<p><code>**</code>を使用し、0個以上の値をディクショナリ形式で受け取ることができます。</p>
+
+<pre><code class="python">def add(**elements):
+  print(elements)
+  result = 0
+  for element in elements.values():
+    result += element
+
+  return result
+
+result = add(x=10, y=20, z=30)
+print(result)
+</code></pre>
+
+<h2>docstring</h2>
+
+<p>docstringの機能を使用することで関数に説明文をつけることができます。
+docstringを参照するにはhelp関数や<strong>doc</strong>を使用する。</p>
+
+<pre><code class="python">def add(x, y):
+  '''
+  arg1 : x &lt; 0 return false
+  arg2 : y &lt; 0 return false
+  else : return x + y
+  '''
+  if(x &lt; 0 or y &lt; 0):
+    return false
+
+  return x + y
+
+help(add)
+print(add.__doc__)
+</code></pre>
+
+<p>IPythonを使用していれば、イントロスペクションの機能で参照することもできる。</p>
+
+<pre><code class="python">In [8]: def add(x, y):
+   ...:   '''
+   ...:   arg1 : x &lt; 0 return false
+   ...:   arg2 : y &lt; 0 return false
+   ...:   else : return x + y
+   ...:   '''
+   ...:   if(x &lt; 0 or y &lt; 0):
+   ...:     return false
+   ...:
+   ...:   return x + y
+   ...:
+
+In [9]: add?
+Signature: add(x, y)
+Docstring:
+arg1 : x &lt; 0 return false
+arg2 : y &lt; 0 return false
+else : return x + y
+File:      ~/&lt;ipython-input-8-616a4d0d9633&gt;
+Type:      function
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>スコープ</h2>
+
+<p>スコープとは参照範囲のことを表します。</p>
+
+<h3>ローカル変数</h3>
+
+<p>関数内で定義した変数はローカル変数と呼ばれ、関数外では参照できません。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+
+print(message) # NameError: name 'message' is not defined
+</code></pre>
+
+<h3>グローバル変数</h3>
+
+<p>関数外で定義した変数はグローバル変数と呼ばれ、関数内でも参照できます。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  print(message)
+
+greet() # Hello
+</code></pre>
+
+<p>では以下のように記述した場合、どちらの変数が参照されるでしょうか。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  message = "Good Morning"
+
+greet()
+print(message)
+</code></pre>
+
+<p>関数内でグローバル変数と同じ名前のローカル変数が定義された場合、関数内ではローカル変数が優先されて参照されます。グローバル変数にアクセスしたい場合は、<code>global 変数名</code>を使用します。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  # greet関数内ではグローバル変数のmessageが参照される
+  global message
+  message = "Good Morning"
+
+greet()
+print(message)
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>関数オブジェクト</h2>
+
+<p>Pythonでは関数もオブジェクトとして扱うことができます。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+def run_something(func):
+  func()
+
+run_something(greet)  # Hello
+</code></pre>
+
+<p><code>()</code>が関数呼び出しを意味しているため、<code>()</code>が無い場合は関数もオブジェクトとして扱います。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+print(type(greet))  # &lt;class 'function'&gt;
+</code></pre>
+
+<h2>関数のネスト</h2>
+
+<p>関数内に別の関数を定義し、使用することができます。</p>
+
+<pre><code class="python">def multi(x, y):
+  def add(x, y):
+    return x + y
+
+  result = 0
+  for i in range(y):
+    result = add(result, x)
+
+  return result
+
+multi(3, 4)
+</code></pre>
+
+<h2>クロージャ</h2>
+
+<p>クロージャとは、関数内部の変数を永続的に保持するための仕組みです。</p>
+
+<pre><code class="python">def gen_calc_circle_area(pi):
+  def calc_circle_area(radius):
+    return pi * radius ** 2
+
+  return calc_circle_area
+
+# 円周率を3で計算するクロージャを生成
+calc_circle_area1 = gen_calc_circle_area(3)
+
+print(calc_circle_area1(1)) # 3
+print(calc_circle_area1(2)) # 12
+
+# 円周率は3.14で計算するクロージャを生成
+calc_circle_area2 = gen_calc_circle_area(3.14)
+
+print(calc_circle_area2(1)) # 3.14
+print(calc_circle_area2(2)) # 12.56
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>ラムダ式</h2>
+
+<p>基本的に関数は関数名をつけて定義すると学習しましたが、ラムダ式の機能を利用することで、無名の関数を定義することができます。
+主に、一時的に使用される関数や、動的に内容を変更する必要がある関数に用いられます。</p>
+
+<pre><code class="python"># 関数名をつけずに定義する
+add = lambda x, y: x + y
+print(type(add))  # &lt;class 'function'&gt;
+print(add(2, 3))  # 5
+</code></pre>
+
+<p>ラムダ式はどのような時に使うのでしょうか。
+filter関数を例にとって考えてみましょう。
+filter関数は、第一引数に論理値を返す関数オブジェクト、第二引数にリストを受け取る関数です。
+IPythonで確認してみましょう。</p>
+
+<pre><code class="python">In [25]: filter?
+Init signature: filter(self, /, *args, **kwargs)
+Docstring:
+filter(function or None, iterable) --&gt; filter object
+
+Return an iterator yielding those items of iterable for which function(item)
+is true. If function is None, return the items that are true.
+Type:           type
+</code></pre>
+
+<p>filter関数はリストの要素を一つずつ、第一引数の関数オブジェクトに渡して、論理値を受け取ります。
+受け取った値がTrueのものだけ取得してくれます。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+over80 = lambda point: point &gt; 80
+
+filter_over80 = filter(over80, points)
+
+passings = list(filter_over80)
+
+print(passings) # [90, 100]
+</code></pre>
+
+<p>省略して以下のように記述するのが一般的です。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+passings = list(filter(lambda point: point &gt; 80, points))
+
+print(passings) # [90, 100]
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>デコレータ</h2>
+
+<p>デコレータは関数内関数の機能を利用して、処理の前後に共通の処理を記述したい場合に用いる。</p>
+
+<pre><code class="python">def add(x, y):
+  print("calculating...")
+  return x + y
+
+# デコレータ
+def logging(func):
+  def new_function(*args):
+    print("start")
+    result = func(*args)
+    print("finished")
+    return result
+
+  return new_function
+
+add = logging(add)
+print(add(1, 2))
+</code></pre>
+
+<p><code>@シンボル</code>を利用することで、シンプルにデコレータを関数に実装することができます。</p>
+
+<pre><code class="python">@logging
+def add(x, y):
+  print("calculating...")
+  return x + y
+
+# デコレータ
+def logging(func):
+  def new_function(*args):
+    print("start")
+    result = func(*args)
+    print("finished")
+    return result
+
+  return new_function
+
+print(add(1, 2))
+</code></pre>
+<div style="page-break-before: always;"></div><h1>7章 クラス</h1>
+
+<p>この章ではクラスについて学習します。</p>
+
+<h2>クラスとは</h2>
+
+<p>クラスとは、属性（データ）とその操作（メソッド）をまとめたオブジェクトの雛形を定義したものです。</p>
+
+<p><img src="images/07/class1.png" width="70%"></p>
+
+<p>クラスを利用するには以下の手順が必要です。</p>
+
+<ol>
+<li>クラスとクラスのメンバ（属性と操作）を定義する</li>
+<li>インスタンスを生成する</li>
+<li>クラスのメンバを利用する</li>
+</ol>
+
+
+<p><img src="images/07/class2.png" width="70%"></p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>1.クラスとクラスのメンバを定義する</h3>
+
+<p>ここではユーザー情報を扱いたいとしましょう。
+クラスを作成するには<code>class</code>を使用します。</p>
+
+<pre><code class="python">class User:
+  pass
+</code></pre>
+
+<h4>コンストラクタ</h4>
+
+<p>クラスにメンバを定義する前に、コンストラクタと呼ばれる特殊なメソッドする必要があります。
+コンストラクタは名前が決まっており、<code>__init__(self)</code>です。</p>
+
+<pre><code class="python">class User:
+  def __init__(self):
+    pass
+</code></pre>
+
+<p>コンストラクタはクラスをインスタンス化した時に呼ばれる、メソッドです。
+主にインスタンスの初期化のために利用されます。</p>
+
+<h4>属性の追加</h4>
+
+<p>クラスに属性を追加する場合は、<code>self.属性名</code>を定義します。
+ユーザーに必要な属性は、姓、名、年齢としましょう。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+</code></pre>
+
+<blockquote><p>selfについて
+Pythonではインスタンスメソッドを定義する時に、引数に必ずselfを記述するというルールがあります。
+selfは自分自身のオブジェクトを意味します。</p></blockquote>
+
+<h4>操作の追加</h4>
+
+<p>クラスに操作を追加する場合は、クラス内にメソッドを定義します。
+ここではユーザーのフルネームを取得するメソッドを定義してみましょう。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+</code></pre>
+
+<p>これでユーザークラスを定義できました。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>2.インスタンスを生成する</h3>
+
+<p>クラスを定義したら次にインスタンスを生成する必要があります。
+インスタンスの生成は以下のようにします。</p>
+
+<pre><code class="python">user = User("Tanaka", "Taro", 20)
+</code></pre>
+
+<p>Userの引数はコンストラクタの引数に受け渡されます。その際、selfには自動的にインスタンス自身が代入され、それより後の引数に代入されます。
+print関数を使用して、確認してみましょう。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    print(self)         # &lt;__main__.User object at 0x10482ee80&gt;
+    print(first_name)   # Tanaka
+    print(last_name)    # Taro
+    print(age)          # 20
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンス化
+user = User("Tanaka", "Taro", 20)
+</code></pre>
+
+<h3>3.クラスのメンバを利用する</h3>
+
+<p>最後にクラスのメンバを利用してみましょう。
+メンバを利用するには<code>インスタンス.メンバ</code>で指定します。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンス化
+user1 = User("Tanaka", "Taro", 20)
+
+# メンバの利用
+print(user1.first_name)      # Tanaka
+print(user1.last_name)       # Taro
+print(user1.age)             # 20
+print(user1.get_full_name()) # Tanaka Taro
+
+# いくつでもインスタンス化できる
+user2 = User("Suzuki", "Hanako", 21)
+
+print(user2.first_name)      # Suzuki
+print(user2.last_name)       # Hanako
+print(user2.age)             # 21
+print(user2.get_full_name()) # Suzuki Hanako
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>クラスの役割</h2>
+
+<p>クラスの役割は属性と操作を分類する（Classify）ことです。
+クラスにはどういうメリットがあるのか、クラスを利用する場合と利用しない場合で比べてみましょう。
+まず、クラスを利用しない場合の例をみてみましょう。
+ユーザー情報を画面に出力するプログラムを考えます。</p>
+
+<pre><code class="python">def get_full_name(last_name, first_name):
+  return last_name + " " + first_name
+
+def show_two_users(user1_first_name, user1_last_name, user1_age,
+                   user2_first_name, user2_last_name, user2_age):
+  print("Name : ", get_full_name(user1_last_name, user1_first_name))
+  print("Age : ", user1_age)
+  print("Name : ", get_full_name(user2_last_name, user2_first_name))
+  print("Age : ", user2_age)
+
+
+user1_first_name = "Taro"
+user1_last_name = "Tanaka"
+user1_age = 20
+
+user2_first_name = "Hanako"
+user2_last_name = "Suzuki"
+user2_age = 21
+
+show_two_users(user1_first_name, user1_last_name, user1_age,
+               user2_first_name, user2_last_name, user2_age)
+</code></pre>
+
+<p>引数や関数が多くて非常に煩雑な様子がわかると思います。
+Userクラスを利用してこれを整理してみましょう。</p>
+
+<pre><code class="python"># クラス定義
+class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+
+def show_two_users(user1, user2):
+  print("Name : ", user1.get_full_name())
+  print("Age : ", user1.age)
+  print("Name : ", user2.get_full_name())
+  print("Age : ", user2.age)
+
+# インスタンス化
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+show_two_users(user1, user2)
+</code></pre>
+
+<p>クラスのおかげで、ユーザーの情報をまとめて一つとして扱えるようになりました。
+それにより、引数も減り、かなり簡潔になったのではないでしょうか。
+情報量が多ければ多いほどクラスの効果は大きくなります。
+実際のプログラムではUserクラスを別ファイルに記述するのが一般的です。
+そうすることで更に簡潔にプログラミングできるようになるでしょう。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>クラス属性</h2>
+
+<p>今まで学習してきた属性はインスタンスに紐づいており、インスタンスを生成しないと使用できませんでした。
+クラス属性を定義することでインスタンスに依存しない属性をクラスに持たせることができます。</p>
+
+<pre><code class="python">class User:
+
+  # クラス属性
+  count = 0
+
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+    __class__.count += 1
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+# インスタンスを生成せずに利用できる
+print(User.count) # 0
+
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+print(User.count) # 2
+</code></pre>
+
+<h2>クラスメソッド</h2>
+
+<p>クラスメソッドはインスタンスに依存しないメソッドです。
+<code>@classmethod</code>を使用して定義します。</p>
+
+<pre><code class="python">class User:
+
+  # クラス属性
+  count = 0
+
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+    __class__.count += 1
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+  # クラスメソッド
+  @classmethod
+  def get_count(cls):
+    print("Number of user is ", cls.count)
+
+# インスタンスを生成せずに利用できる
+User.get_count()  # Number of user is  0
+
+user1 = User("Tanaka", "Taro", 20)
+user2 = User("Suzuki", "Hanako", 21)
+
+User.get_count()  # Number of user is  2
+</code></pre>
+
+<p>インスタンスメソッドの引数にselfを指定するのと同じように、クラスメソッドの引数にはclsを指定します。clsにはクラスの情報が代入されます。</p>
+
+<h2>スタティックメソッド</h2>
+
+<p>スタティックメソッドはクラスメソッドと同様にインスタンスに依存しないメソッドです。
+ただしスタティックメソッドは、引数にクラスの情報が代入されません。
+そのためクラスにも依存しないメソッド、関数に近いものと考えてよいでしょう。</p>
+
+<pre><code class="python">class Math:
+  @staticmethod
+  def add(x, y):
+    return x + y
+
+  @staticmethod
+  def multi(x, y):
+    return x * y
+
+# (2 + 3) * 5
+print(Math.multi(Math.add(2, 3), 5))
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>継承</h2>
+
+<p>継承の仕組みを利用することで、既存のクラスを拡張したクラスを定義することができます。
+継承を利用するには<code>class クラス名(継承元クラス)</code>とします。
+ユーザークラスを継承した社社員クラスを定義してみましょう。
+社員クラスはユーザー情報の他に社員番号（EMPNO）を持つとします。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    # 親のコンストラクタ呼び出し
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(self.get_full_name + " working...")
+</code></pre>
+
+<p>継承元のクラス（User）を親クラスやスーパークラスと呼び、継承先のクラス（Employee）を子クラスやサブクラスと呼びます。
+子クラスでは、親のインスタンスを参照したい場合は、superメソッドを使用します。
+子クラスは親クラスの属性と操作を継承します。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    # 親のコンストラクタ呼び出し
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(self.get_full_name() + " working...")
+
+emp = Employee("001", "Tanaka", "Taro", 20)
+
+# 親クラスの属性
+print(emp.last_name)    # Tanaka
+print(emp.first_name)   # Taro
+print(emp.age)          # 20
+
+# 親クラスの操作
+print(emp.get_full_name())  # Tanaka Taro
+
+# 自クラスの属性
+print(emp.empno)      # 001
+
+# 自クラスの操作
+emp.work()            # Tanaka Taro working...
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>オーバーライド</h2>
+
+<p>親クラスで定義されたメソッドを子クラスで再定義することをオーバーライドと言います。</p>
+
+<pre><code class="python">class User:
+  def __init__(self, last_name, first_name, age):
+    self.last_name = last_name
+    self.first_name = first_name
+    self.age = age
+
+  def get_full_name(self):
+    return self.last_name + " " + self.first_name
+
+class Employee(User):
+  def __init__(self, empno, first_name, last_name, age):
+    self.empno = empno
+    super().__init__(first_name, last_name, age)
+
+  def work(self):
+    print(super().get_full_name() + " working...")
+
+  def get_full_name(self):
+    return "Name : " + self.last_name + " " + self.first_name
+
+emp = Employee("001", "Tanaka", "Taro", 20)
+
+print(emp.get_full_name())  # Name : Tanaka Taro
+</code></pre>
+
+<h2>多重継承</h2>
+
+<p>多くのオブジェクト指向言語で多重継承は許可していませんが、Pythonでは多重継承を許しています。</p>
+
+<pre><code class="python">class Robot:
+  def charge(self):
+    print("charging...")
+
+class Dog:
+  def bark(self):
+    print("barking...")
+
+class RobotDog(Robot, Dog):
+  pass
+
+bob = RobotDog()
+bob.charge()    # charging...
+bob.bark()      # barking...
+</code></pre>
+
+<blockquote><p>親クラス内に同一メソッドが存在する場合は、先に記述したクラスのメソッドが優先されます。</p></blockquote>
+<div style="page-break-before: always;"></div><h1>8章 エラー処理</h1>
+
+<p>この章ではエラー処理について学習します。</p>
+
+<h2>try-except</h2>
+
+<p>エラーを意図的に発生させてみましょう。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+# エラーが発生
+point = points[4]
+
+# 以降の処理はスキップされる
+print("Hello")
+# IndexError: list index out of range
+</code></pre>
+
+<p>上記のコードでは<code>point = points[4]</code>で、リストの要素外にアクセスしており、そこで処理が終了してしまっています。そのため、<code>print("Hello")</code>は実行されません。</p>
+
+<p>そこで、エラーが発生しそうなコードをtry-exceptで囲むことで、エラーを補足することができます。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+try:
+  # エラーが発生
+  point = points[4]
+
+  # 以降の処理はスキップされる
+  print("Hello")
+
+except:
+  # try-except内でエラー発生時のみ実行される
+  print("Need a points between 0 and ", len(points) - 1)
+
+# 以降の処理はスキップされない
+print("Hello")
+</code></pre>
+
+<p>上記のコードではtry-except内でエラーが発生した場合、それがどのようなエラーでも同じメッセージが表示されてしまいます。それでは、ユーザーに詳細な情報を届けることができません。エラーの種類によって処理を分けたい場合は、<code>except [exceptiontype] as [name]</code>という記述をします。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+while(True):
+  val = input('input number')
+
+  if(val == "q"):
+    break
+
+  try:
+    point = points[int(val)]
+    print(point)
+  except IndexError as err:
+    # try-except内でIndexError発生時のみ実行される
+    print("Need a points between 0 and ", len(points) - 1)
+
+  except Exception as other:
+    # try-except内でIndexError以外のエラー発生時のみ実行される
+    print("something else", other)
+</code></pre>
+
+<blockquote><p>input関数はユーザーの入力を待つ関数です。戻り値はユーザーの入力値を文字列型で返します。
+inputをwhileで繰り返すことで、何度もユーザーの入力を待つことができます。</p></blockquote>
+
+<p>エラーの種類に関しては公式ドキュメントを参考にしてください。<br/>
+https://docs.python.org/3.7/library/exceptions.html#exception-hierarchy</p>
+
+<h2>try-except-else</h2>
+
+<p>try-exceptでエラーの補足ができることがわかりました。
+これにelseを追加して、エラーが発生しなかった場合の処理を追加することができます。</p>
+
+<pre><code class="python">try:
+  result = 1 / 0
+except ZeroDivisionError:
+  print("dvided by 0")
+else:
+  # エラーが発生しなかった場合のみ実行される
+  print("finished")
+</code></pre>
+
+<p>else句はエラーが発生しなかった場合のみ実行されます。以下のように書き換えてみましょう。</p>
+
+<pre><code class="python">try:
+  result = 1 / 1
+except ZeroDivisionError:
+  print("dvided by 0")
+else:
+  # エラーが発生しなかった場合のみ実行される
+  print("finished")
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>try-finally</h2>
+
+<p>except句はエラー発生時、else句はエラー非発生時に実行されました。finally句を追加することで、エラーが発生しても発生しなくても実行する処理を記述することができます。</p>
+
+<pre><code class="python">try:
+  result = 1 / 1
+finally:
+  print("finally")
+</code></pre>
+
+<p>エラーが発生する場合も記述してみましょう。</p>
+
+<pre><code class="python">try:
+  result = 1 / 0
+finally:
+  print("finally")
+</code></pre>
+
+<p>いずれの場合でもfinallyが出力されたと思います。
+また、間にexcept句を記述することもできます。</p>
+
+<pre><code class="python">try:
+  result = 1 / 1
+except ZeroDivisionError:
+  print("dvided by 0")
+finally:
+  print("finally")
+</code></pre>
+
+<h2>独自エラー</h2>
+
+<p>エラーを独自に定義するにはExceptionクラスを継承したクラスを作成します。</p>
+
+<pre><code class="python">class OverAgeException(Exception):
+  pass
+
+ages = [10, 8 , 9, 19]
+
+try:
+  for age in ages:
+    if(age &gt; 15):
+      raise OverAgeException(age)
+except OverAgeException as err:
+  print("only under 15 years old ", age)
+</code></pre>
+<div style="page-break-before: always;"></div><h1>9章 モジュール化</h1>
+
+<p>この章ではモジュール化について学習します。</p>
+
+<h2>モジュール化とは</h2>
+
+<p>複雑なシステム機能を相互依存の強い部品同士で構成するのではなく、交換可能で独立した部品同士で構成するようにすることをモジュール化と言います。わかりやすく言い換えると、機能ごとに別ファイルに分類しましょうと言うことです。</p>
+
+<h3>機能ごとに別ファイルに分類する</h3>
+
+<p>計算機能を定義した<code>calculator.py</code>と、計算を実行するための<code>calculator_main.py</code>ファイルを別々に作成してみましょう。まず、以下の内容で<code>calculator.py</code>を作成します。</p>
+
+<pre><code class="python">def add(x, y):
+  return x + y
+</code></pre>
+
+<p>次に<code>calculator_main.py</code>を作成します。別モジュールを使用するにはインポートという作業を行う必要があります。<code>import モジュール名</code>でインポートできます。</p>
+
+<pre><code class="python">import calculator
+
+print(calculator.add(3, 4))
+</code></pre>
+
+<p>モジュールを作成したら、コマンドラインから<code>calculator_main.py</code>を実行します。</p>
+
+<pre><code>% python calculator_main.py
+7
+</code></pre>
+
+<p>また、また、インポート文を<code>from モジュール名 import インポート対象</code>とすることで、参照時に省略が可能です。</p>
+
+<pre><code class="python">from calculator import add
+
+print(add(3, 4))
+</code></pre>
+
+<h3>モジュールをパッケージ（フォルダ）ごとに分類する</h3>
+
+<p>モジュール化が進みファイルの数が増えてくると、今度はファイルの管理が難しくなってきます。ファイルが増えてきたらフォルダ分けしてファイルを管理しますよね。それと同様にしてモジュールもフォルダ分けして管理するようにします。このフォルダのことをパッケージと呼びます。先ほどの2ファイルを以下のようにフォルダ分けしてみましょう。</p>
+
+<pre><code>├── calculator_main.py
+└── exercise
+    └── calculator.py
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>スクリプト化</h2>
+
+<p>以下の内容でexercise.greeterモジュールを作成してください。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+  print(message)
+
+greet()
+</code></pre>
+
+<pre><code>[ディレクトリ構成]
+├── calculator_main.py
+└── exercise
+    ├── calculator.py
+    └── greeter.py
+</code></pre>
+
+<p>greeterモジュールをcalculator_mainモジュールにインポートしてみましょう。</p>
+
+<pre><code class="python">from exercise.calculator import add
+import exercise.greeter
+
+print(add(3, 4))
+</code></pre>
+
+<p>作成できたら実行します。</p>
+
+<pre><code>% python calculator_main.py
+Hello
+7
+</code></pre>
+
+<p>calculator_mainモジュールではgreet関数は呼び出していませんが、Helloが出力されてしまっています。このようにグローバルスコープに書かれた内容はインポート時に自動的に実行されてしまいます。これを回避するには、スクリプト実行された場合のみgreet関数を呼び出すように、greeterモジュールを以下のように修正します。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+  print(message)
+
+if __name__ == '__main__':
+  greet()
+</code></pre>
+
+<p>修正したら実行します。</p>
+
+<pre><code>% python calculator_main.py
+7
+</code></pre>
+
+<p>追記された<strong>name</strong>変数は特殊な変数で、import時にはモジュール名が自動的に代入され、スクリプト実行時には<strong>main</strong>が代入されます。
+そのため、greeterモジュールをスクリプト実行するとHelloが出力されます。</p>
+
+<pre><code>% python exercise/greeter.py
+Hello
+</code></pre>
+<div style="page-break-before: always;"></div><h1>10章 文字列操作</h1>
+
+<p>この章では文字列操作について学習します。</p>
+
+<h2>フォーマット文字列の生成</h2>
+
+<p>フォーマット文字列は<code>%</code>を使用し文字列を生成する方法です。</p>
+
+<pre><code class="python">str1 = "%sは%sです" %("cat", "mammals")
+str2 = "%(name)sは%(type)sです" %{"name":"dog", "type":"mammals"}
+
+print(str1) # 猫は哺乳類です
+print(str2) # 犬は哺乳類です
+</code></pre>
+
+<p>フォーマットの記号の詳細は公式ドキュメントを参照してください。<br/>
+https://docs.python.org/3.7/library/string.html#format-string-syntax</p>
+
+<p>文字列クラスのformatメソッドを使用する方法もあります。</p>
+
+<pre><code class="python">str1 = "{0}は{1}です".format("cat", "mammals")
+
+d = {"name":"dog", "type":"mammals"}
+str2 = "{name}は{type}です".format(**d)
+
+print(str1)
+print(str2)
+</code></pre>
+
+<blockquote><p>上記の**dはディクショナリ型を展開した上でformatメソッドに渡しています。</p></blockquote>
+
+<h2>文字列の操作</h2>
+
+<h3>文字列の検索</h3>
+
+<p>文字列内から文字を検索する方法をみてみましょう。
+Pythonではリストの時に学習した、in演算子を使うことで文字列も検索することができます。</p>
+
+<pre><code class="python">exist = "cat" in "cat is mammals"
+print(exist)  # True
+</code></pre>
+
+<h3>文字列のインデックスの取得</h3>
+
+<p>検索した文字列が何番目に初めて出てくるかを調べることができます。
+indexメソッドまたはfindメソッドを使用します。</p>
+
+<pre><code class="python">index1 = "cat is mammals".index("is")
+print(index1) # 4
+index2 = "cat is mammals".index("dog")  # ValueErrorが発生する
+</code></pre>
+
+<p>indexメソッドは検索文字列が存在しない場合はValueErrorが発生します。
+findメソッドは検索文字列が存在しない場合、-1を返します。</p>
+
+<pre><code class="python">index1 = "cat is mammals".find("is")
+print(index1) # 4
+index2 = "cat is mammals".find("dog")
+print(index2) # -1
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>開始文字列を調べる</h3>
+
+<p>文字列が指定の文字列で開始されているか調べることができます。
+startswithメソッドを使用します。</p>
+
+<pre><code class="python">start_check1 = "cat is mammals".startswith("cat")
+start_check2 = "cat is mammals".startswith("is")
+
+print(start_check1) # True
+print(start_check2) # False
+</code></pre>
+
+<h3>終了文字列を調べる</h3>
+
+<p>文字列が指定の文字列で終了されているか調べることができます。
+endswithメソッドを使用します。</p>
+
+<pre><code class="python">end_check1 = "cat is mammals".endswith("cat")
+end_check2 = "cat is mammals".endswith("als")
+
+print(end_check1) # False
+print(end_check2) # True
+</code></pre>
+
+<h3>英文字の確認</h3>
+
+<p>文字列がalphabeticのみで構成されているか確認することができます。
+isalphaメソッドを使用します。</p>
+
+<pre><code class="python">alpha_check1 = "abc".isalpha()
+alpha_check2 = "1ab".isalpha()
+alpha_check3 = "あa".isalpha()
+
+print(alpha_check1)   # True
+print(alpha_check2)   # False
+print(alpha_check3)   # True
+</code></pre>
+
+<h3>英数字の確認</h3>
+
+<p>文字列がalphabetic、または、数値で構成されているか確認することができます。
+isalnumメソッドを使用します。</p>
+
+<pre><code class="python">alnum_check1 = "abc".isalnum()
+alnum_check2 = "1ab".isalnum()
+alnum_check3 = "あa１".isalnum()
+
+print(alnum_check1)   # True
+print(alnum_check2)   # True
+print(alnum_check3)   # True
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>数値の確認</h3>
+
+<p>文字列が数値のみで構成されているか確認することができます。
+isdigitメソッド、または、isnumericメソッドを使用します。</p>
+
+<pre><code class="python">digit_check1 = "123.5".isdigit()
+digit_check2 = "１２３".isdigit()
+digit_check3 = "-3".isdigit()
+digit_check4 = "ⅴ".isdigit()
+digit_check5 = "ⅴ".isnumeric()
+
+print(digit_check1) # False
+print(digit_check2) # True
+print(digit_check3) # False
+print(digit_check4) # False
+print(digit_check5) # True
+</code></pre>
+
+<h3>文字列の分割</h3>
+
+<p>文字列を指定文字列で分割することができます。
+splitメソッドを使います。
+戻り値は分割された文字列のリストで返ってきます。</p>
+
+<pre><code class="python">split_strings1 = "a,b,c".split(",")
+split_strings2 = "ab cd ef".split(" ")
+split_strings3 = "ab cd ef".split(",")
+
+
+print(split_strings1) # ['a', 'b', 'c']
+print(split_strings2) # ['ab', 'cd', 'ef']
+print(split_strings3) # ['ab cd ef']
+</code></pre>
+
+<h3>文字列の置換</h3>
+
+<p>文字列を指定文字列で置換することができます。
+replaceメソッドを使います。</p>
+
+<pre><code class="python">reaplaced1 = "Hello World".replace("l", "zz")
+reaplaced2 = "Hello World".replace(" ", ",")
+
+print(reaplaced1) # Hezzzzo Worzzd
+print(reaplaced2) # Hello,World
+</code></pre>
+<div style="page-break-before: always;"></div><h1>11章 正規表現</h1>
+
+<p>この章では正規表現について学習します。</p>
+
+<h2>正規表現とは</h2>
+
+<p>正規表現とは文字列の集合を一つの文字列で表現する方法です。多くの場合、文字列の検索や入力チェック
+置換などで利用されます。</p>
+
+<h2>主な正規表現</h2>
+
+<p>主な正規表現の特殊文字には以下のようなものがあります。</p>
+
+<p><strong>[開始/終了]</strong>
+|記述方法|内容|
+|-|-|
+|^|文字列の先頭|
+|$|文字列の末尾|</p>
+
+<p><strong>[文字種]</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>記述方法</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>改行以外の任意の文字</td>
+</tr>
+<tr>
+<td>[...]</td>
+<td>文字の集合を指定</td>
+</tr>
+<tr>
+<td>[^...]</td>
+<td>文字の集合の補集合要素</td>
+</tr>
+<tr>
+<td>¥d</td>
+<td>任意の10進数[0-9]</td>
+</tr>
+<tr>
+<td>¥D</td>
+<td>任意の非数字文字[^0-9]</td>
+</tr>
+<tr>
+<td>¥w</td>
+<td>任意の英数文字および下線[a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td>¥W</td>
+<td>任意の非英数文字[^a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td>¥s</td>
+<td>任意の空白文字</td>
+</tr>
+<tr>
+<td>¥S</td>
+<td>任意の非空白文字</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><strong>[繰り返し回数]</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>記述方法</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{m}</td>
+<td>m回の繰り返し</td>
+</tr>
+<tr>
+<td>{m, n}</td>
+<td>m回からn回の繰り返し</td>
+</tr>
+<tr>
+<td>+</td>
+<td>直前にある文字が1回以上繰り返される</td>
+</tr>
+<tr>
+<td>*</td>
+<td>直前にある文字が0回以上繰り返される</td>
+</tr>
+</tbody>
+</table>
+
+
+<div style="page-break-before:always"></div>
+
+
+<h2>検索</h2>
+
+<p>正規表現を使用して検索を行うには、reモジュールのsearch関数を使用します。
+正規表現にマッチした場合は正規表現オブジェクトを返し、マッチしない場合はNoneを返します。</p>
+
+<pre><code class="python">import re
+
+'''
+^$d : 数値で始まり
+* : 0回以上繰り返し
+$ : それが最後の文字
+'''
+print(re.search("\d+", "1234")) # &lt;re.Match object; span=(0, 4), match='1234'&gt;
+print(re.search("\d+", "1234").group()) # 1234
+print(re.search("\d+", "abc"))  # None
+print(re.search("\d+", "123abc")) # &lt;re.Match object; span=(0, 3), match='123'&gt;
+print(re.search("\d+", "ab123cd")) # &lt;re.Match object; span=(2, 5), match='123'&gt;
+</code></pre>
+
+<h2>入力チェック</h2>
+
+<p>正規表現を使用して入力チェックを行うには、reモジュールのmatch関数を使用します。
+match関数はsearch関数とよく似ています。search関数は文字列中のどこか一致するものを探すのに対し、match関数は文字列の先頭から正規表現と一致しているか判定します。</p>
+
+<pre><code class="python">import re
+
+print(re.match("\d+", "1234")) # &lt;re.Match object; span=(0, 4), match='1234'&gt;
+print(re.match("\d+", "123abc"))  # &lt;re.Match object; span=(0, 3), match='123'&gt;
+print(re.match("\d+", "ab123cd")) # None
+</code></pre>
+
+<p>入力チェックにはmatch関数のほうがふさわしいでしょう。</p>
+
+<h2>置換</h2>
+
+<p>正規表現を使用して置換を行うには、reモジュールのsub関数を使用します。
+正規表現にマッチした箇所を指定文字列に置き換えます。</p>
+
+<pre><code class="python">import re
+
+print(re.sub("\d{2}", "XX", "ab123c45de"))  # abXX3cXXde
+</code></pre>
+<div style="page-break-before: always;"></div><h1>12章 日時操作</h1>
+
+<p>この章では日時操作について学習します。</p>
+
+<h2>datetimeモジュール</h2>
+
+<p>datetimeモジュールは日付や時間を操作するためのモジュールです。
+まずは現在日時を取得してみましょう。nowメソッドを使用します。</p>
+
+<pre><code class="python">from datetime import datetime
+
+now = datetime.now()
+
+print(now)   # 2018-12-01 12:47:30.639691
+</code></pre>
+
+<h3>指定日時の作成</h3>
+
+<p>指定した日時のdatetimeインスタンスを生成してみましょう。
+コンストラクタに日時分秒を指定することで生成します。</p>
+
+<pre><code class="python">from datetime import datetime
+
+d1 = datetime(2018, 12, 2)
+d2 = datetime(2018, 12, 2, 1, 2, 3)
+
+print(d1)  # 2018-12-02 00:00:00
+print(d2)  # 2018-12-02 01:02:03
+</code></pre>
+
+<h3>曜日の取得</h3>
+
+<p>datetimeインスタンスから曜日を取得することができます。
+weekdayメソッドを使用します。</p>
+
+<pre><code class="python">from datetime import datetime
+
+d = datetime(2018, 12, 2)
+w = d.weekday()
+
+print(w)  # 6
+</code></pre>
+
+<p>曜日は数値で返ってきます。数値と曜日は以下のように対応しています。</p>
+
+<table>
+<thead>
+<tr>
+<th>数値</th>
+<th>曜日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>月曜日</td>
+</tr>
+<tr>
+<td>1</td>
+<td>火曜日</td>
+</tr>
+<tr>
+<td>2</td>
+<td>水曜日</td>
+</tr>
+<tr>
+<td>3</td>
+<td>木曜日</td>
+</tr>
+<tr>
+<td>4</td>
+<td>金曜日</td>
+</tr>
+<tr>
+<td>5</td>
+<td>土曜日</td>
+</tr>
+<tr>
+<td>6</td>
+<td>日曜日</td>
+</tr>
+</tbody>
+</table>
+
+
+<div style="page-break-before:always"></div>
+
+
+<h3>日時を文字列に変換</h3>
+
+<p>日時を指定フォーマットの文字列に変換することができます。
+strftimeメソッドを使用します。</p>
+
+<pre><code class="python">from datetime import datetime
+
+d = datetime(2018, 12, 2)
+date_string = d.strftime("%Y/%m/%d")
+
+print(date_string)  # 2018/12/02
+</code></pre>
+
+<p>フォーマットの記号の詳細は公式ドキュメントを参照してください。<br/>
+https://docs.python.org/3.7/library/datetime.html#strftime-and-strptime-behavior</p>
+
+<h3>文字列を日時に変換</h3>
+
+<p>反対に文字列からdatetimeインスタンスを生成することができます。
+strptimeメソッドを使用します。</p>
+
+<pre><code class="python">from datetime import datetime
+
+d = datetime.strptime("2018/12/2", "%Y/%m/%d")
+
+print(d)  # 2018-12-02 00:00:00
+</code></pre>
+
+<h3>timedeltaクラス</h3>
+
+<p>日付の加減算を行うにはtimedeltaクラスを使用します。</p>
+
+<pre><code class="python">from datetime import datetime, timedelta
+
+d = datetime.now()
+oneday = timedelta(days = 1)
+yesterday = d - oneday
+
+print(yesterday)  # 2018-11-30 13:14:42.034219
+</code></pre>
+
+<h3>dateクラス</h3>
+
+<p>日付までで時分秒の情報が必要ない場合はdateクラスを使用しましょう。</p>
+
+<pre><code class="python">from datetime import date
+
+d1 = date.today()
+d2 = date(2018, 12, 2)
+
+print(d1)
+print(d2)
+</code></pre>
+<div style="page-break-before: always;"></div><h1>13章 ファイル操作</h1>
+
+<p>この章ではファイル操作について学習します。</p>
+
+<h2>ファイルを読み込む</h2>
+
+<p>open関数を使用してファイルをプログラム上で開くことができます。
+先にファイルを作成しましょう。users.csvというファイル名でカレントディレクトリに以下のファイルを作成します。</p>
+
+<pre><code class="csv">user1,pass1
+user2,pass2
+user3,pass3
+</code></pre>
+
+<p>次にopen関数を使用してusers.csvを読み込んでみましょう。</p>
+
+<pre><code class="python">f = open("users.csv", "r", encoding="utf-8")
+text = f.read()
+
+print(text)
+'''
+user1,pass1
+user2,pass2
+user3,pass3
+'''
+
+f.close()
+</code></pre>
+
+<p>open関数の第二引数の<code>r</code>はファイルを開くときのモードです。以下のような対応があります。</p>
+
+<table>
+<thead>
+<tr>
+<th>文字</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>読み込み（省略可)</td>
+</tr>
+<tr>
+<td>w</td>
+<td>書き込み</td>
+</tr>
+<tr>
+<td>a</td>
+<td>追加書き込み</td>
+</tr>
+<tr>
+<td>b</td>
+<td>バイナリモード</td>
+</tr>
+</tbody>
+</table>
+
+
+<blockquote><p>ファイルを閉じるにはcloseメソッドを使用します。</p></blockquote>
+
+<h3>行毎に読み込む</h3>
+
+<p>ファイルの内容を行ごとに読み込むこともできます。
+readlinesメソッドを使用します。</p>
+
+<pre><code class="python">f = open("users.csv", encoding="utf-8")
+
+for line in f.readlines():
+  print(line)
+
+'''
+user1,pass1
+
+user2,pass2
+
+user3,pass3
+'''
+
+f.close()
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>ファイルに書き込む</h2>
+
+<p>ファイルにデータを書き込むにはwriteメソッドを使用します。</p>
+
+<pre><code class="python">f = open("writing.txt", "w", encoding="utf-8")
+
+f.write("Hello World!")
+
+f.close()
+</code></pre>
+
+<p>ファイルが作成されているので確認してみましょう。</p>
+
+<pre><code>% cat writing.txt
+Hello World!
+</code></pre>
+
+<h3>行毎に書き込む</h3>
+
+<p>writelinesメソッドを使用して、データを行毎に書き込むことができます。</p>
+
+<pre><code class="python">f = open("writing.txt", "w", encoding="utf-8")
+
+f.writelines("Hello World 1\r\n")
+f.writelines("Hello World 2\r\n")
+f.writelines("Hello World 3\r\n")
+
+f.close()
+</code></pre>
+
+<blockquote><p>改行が必要な場合は改行コードも記述する必要があります。</p></blockquote>
+
+<h3>with</h3>
+
+<p>with文を使用することで、処理ブロックを抜けた時に自動的にファイルが閉じるようになります。
+ファイルの閉じ忘れなどを防ぐことができます。</p>
+
+<pre><code class="python">with open("users.csv", "r", encoding="utf-8") as f:
+  print(f.read())
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>csvモジュール</h2>
+
+<p>CSVとはComma-Separated Valuesの略で、カンマ区切りのファイルのことです。
+csvモジュールはCSVファイルを扱うためのモジュールです。
+CSVファイルの読み込みをしてみましょう。</p>
+
+<pre><code class="python">import csv
+
+with open("users.csv", "r", encoding="utf-8") as f:
+  reader = csv.reader(f)
+  for row in reader:
+    print(row)
+</code></pre>
+
+<p>次にCSVファイルを作成してみましょう。CSVファイルに書き込むリストを用意します。</p>
+
+<pre><code class="python">import csv
+
+new_users = [
+          ["user4", "pass4"],
+          ["user5", "pass5"],
+          ["user6", "pass6"]
+          ]
+
+with open("users.csv", "a", encoding="utf-8") as f:
+  writer = csv.writer(f)
+  writer.writerows(new_users)
+</code></pre>
+
+<p>users.csvファイルを確認してみましょう。以下の内容が書き込まれていると思います。</p>
+
+<pre><code>user1,pass1
+user2,pass2
+user3,pass3
+user4,pass4
+user5,pass5
+user6,pass6
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>jsonモジュール</h2>
+
+<p>JSONとはJavaScript Object Notationの略で、キーと値をコロン、データをカンマで区切ったファイルのことです。
+jsonモジュールはJSONファイルを扱うためのモジュールです。
+JSONファイルを作成してみましょう。JSONファイルに書き込むディクショナリを用意します。</p>
+
+<pre><code class="python">import json
+
+users = {"first_name" : "Taro",
+         "last_name": "Tanaka",
+         "age" : 20}
+
+with open("users.json", "w", encoding="utf-8") as f:
+  json.dump(users, f)
+</code></pre>
+
+<p>users.jsonファイルが作成され、以下の内容が書き込まれたと思います。</p>
+
+<pre><code>{"first_name": "Taro", "last_name": "Tanaka", "age": 20}
+</code></pre>
+
+<p>次にJSONファイルを読み込みます。</p>
+
+<pre><code class="python">import json
+
+with open("users.json", "r", encoding="utf-8") as f:
+  user = json.load(f)
+
+print(user) # {'first_name': 'Taro', 'last_name': 'Tanaka', 'age': 20}
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>パス構築</h2>
+
+<p>osモジュールを読み込んで、パスを生成することができます。
+join関数を使用します。</p>
+
+<pre><code class="python">from os import path
+
+p = path.join("path1", "path2", "path3")
+
+print(p)  # path1/path2/path3
+</code></pre>
+
+<h3>絶対パスを取得する</h3>
+
+<p>abspath関数で絶対パスを取得することができます。</p>
+
+<pre><code class="python">from os import path
+
+p = path.abspath("users.csv")
+
+print(p) # ~/Learning/python_introduction/text/sources/12/users.csv
+</code></pre>
+
+<h3>パスを分割する</h3>
+
+<p>split関数を使用して、パスを分割することができます。</p>
+
+<pre><code class="python">from os import path
+
+p = path.split("~/Learning/python_introduction/text/sources/12/users.csv")
+
+print(p) # ('/Learning/python_introduction/text/sources/12', 'users.csv')
+</code></pre>
+
+<h3>存在チェック</h3>
+
+<p>exists関数を使用して、ファイル、ディレクトリが存在するか確認することができます。</p>
+
+<pre><code class="python">from os import path
+
+exists1 = path.exists("users.csv")
+exists2 = path.exists("XXX.csv")
+
+print(exists1)  # True
+print(exists2)  # False
+</code></pre>
+
+<h3>ファイルの削除</h3>
+
+<p>remove関数を使用してファイルを削除することができます。</p>
+
+<pre><code class="python">import os
+
+os.remove("writing.txt")
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>ディレクトリの作成と削除</h3>
+
+<p>ファイル同様、ディレクトリの作成と削除ができます。
+作成する場合は、mkdir関数を使用します。
+また、listdir関数でディレクトリの中身を確認することができます。</p>
+
+<pre><code class="python">import os
+
+os.mkdir("dir1")
+print(os.listdir("./"))   # ['users.csv', 'dir1']
+</code></pre>
+
+<p>削除する場合は、rmdir関数を使用します。</p>
+
+<pre><code class="python">import os
+
+os.rmdir("dir1")
+</code></pre>
+<div style="page-break-before: always;"></div><h1>14章 Webスクレイピング</h1>
+
+<p>この章ではWebスクレイピングについて学習します。</p>
+
+<h2>Webスクレイピングとは</h2>
+
+<p>Webスクレイピングとは、プログラムを使ってWebからコンテンツをダウンロードして処理することです。
+以下のモジュールを使用します。</p>
+
+<ul>
+<li>webbrowser</li>
+<li>requests</li>
+<li>BeautifulSoup</li>
+<li>Selenium</li>
+</ul>
+
+
+<h2>webbrowser</h2>
+
+<p>webbrowserモジュールはブラウザを操作します。</p>
+
+<pre><code class="python">import webbrowser
+
+webbrowser.open("http://python.org")
+</code></pre>
+
+<p>入力した住所のGoogleMapを開くようにしてみましょう。</p>
+
+<pre><code class="python">import webbrowser
+
+while(True):
+  address = input('input address')
+  print(address)
+  webbrowser.open("https://www.google.co.jp/maps/place/" + address)
+</code></pre>
+
+<h2>requests</h2>
+
+<p>requestsモジュールはHTTPリクエストを送信するためのモジュールです。
+Python付属のモジュールでないため、インストールする必要があります。
+ここではpipというパッケージマネージャーを使用してインストールします。</p>
+
+<pre><code>% pip install requests
+</code></pre>
+
+<p>ではrequestsモジュールを使用してリクエストを送信してみましょう。</p>
+
+<pre><code class="python">import requests
+
+res = requests.get("http://python.org")
+
+print(type(res))
+print(res.text)
+print(res)
+</code></pre>
+
+<p>HTMLが取得できたと思います。</p>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>エラーチェック</h3>
+
+<p>HTTPリクエストは様々な理由から常に正常にレスポンスが帰ってくるとは限りません。そのため、エラーのチェックが必要になります。raise_for_statusメソッドは正常にレスポンスであれば何もせず、異常がある場合のみ、例外を発生させます。</p>
+
+<pre><code class="python">import requests
+
+res = requests.get("http://python.org")
+
+res.raise_for_status()
+</code></pre>
+
+<p>この状態では何も起きません。あえてURLを間違えてみましょう。</p>
+
+<pre><code class="python">import requests
+
+res = requests.get("http://python.xxx")
+
+res.raise_for_status()
+</code></pre>
+
+<h2>BeautifulSoup</h2>
+
+<p>BeautifulSoupはHTMLから情報を抽出するモジュールです。
+requestsモジュール同様、Pythonに付属していないのでpipでインストールします。</p>
+
+<pre><code>% pip install beautifulsoup4
+</code></pre>
+
+<p>WebサイトをBeautifulSoupに読み込ませてみましょう。</p>
+
+<pre><code class="python">import requests, bs4
+
+res = requests.get("http://python.org")
+res.raise_for_status()
+
+soup = bs4.BeautifulSoup(res.text)
+print(type(soup))
+</code></pre>
+
+<p>BeautifulSoupインスタンスが生成されたので、selectメソッドを使用して、要素を探します。
+要素の検索にはCSSセレクタを使用します。メタタグを取得してみましょう。</p>
+
+<pre><code class="python">import requests, bs4
+
+res = requests.get("http://python.org")
+res.raise_for_status()
+
+soup = bs4.BeautifulSoup(res.text)
+elems = soup.select("meta")
+
+print(elems)
+print(str(elems[0))
+print(elems[0].attrs)
+print(elems[0].get("charset"))
+</code></pre>
+
+<p>これを応用して、Yahooの画像検索の結果を収集してみましょう。</p>
+
+<pre><code class="python">import requests, bs4, os
+
+# 検索キーワードはApple
+keyword = "Apple"
+
+# 画像を保存するフォルダを作成
+os.mkdir(keyword)
+
+# 画像検索の結果のURLにリクエストを送信
+res = requests.get("https://search.yahoo.co.jp/image/search?p={0}&amp;ei=UTF-8&amp;fr=top_ga1_sa".format(keyword))
+res.raise_for_status()
+
+# レスポンスからimgタグを取得する
+soup = bs4.BeautifulSoup(res.text)
+elems = soup.select("img")
+
+# imgタグの個数だけ繰り返す
+count = 0
+for elem in elems:
+
+  # imgタグのsrc属性から画像URLを取得
+  image_url = elem.get("src")
+
+  print("Downloading... {0}".format(image_url))
+
+  # 画像URLにリクエストを送る
+  image_res = requests.get(image_url)
+  image_res.raise_for_status()
+
+  # 画像ファイルの保存名生成
+  filename = os.path.join(keyword, str(count) + ".png")
+  count += 1
+
+  # 画像ファイル保存（画像はバイナリデータなので"wb"
+  with open(filename, "wb") as f:
+
+    # レスポンスを保存する場合は、iter_contentメソッドを使用し、チャンクごとに保存する
+    # 各チャンクはバイトデータ型で、最大バイト数を指定する（10KB)
+    for chunk in image_res.iter_content(100000):
+      f.write(chunk)
+</code></pre>
+<div style="page-break-before: always;"></div>
+</body>
+</html>

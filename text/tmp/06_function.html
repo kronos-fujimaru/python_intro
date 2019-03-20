@@ -1,0 +1,383 @@
+<h1>6章 関数</h1>
+
+<p>この章では関数について学習します。</p>
+
+<h2>関数とは</h2>
+
+<p>関数とは処理のかたまりに名前をつけたものです。
+名前を"呼び出す"ことによって何度でも処理を実行させることができます。</p>
+
+<h2>関数の定義</h2>
+
+<p>関数の定義には<code>def</code>を使用します。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+</code></pre>
+
+<p>関数は定義するだけでは実行されません。
+関数を実行するには関数を"呼び出す"必要があります。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+#関数呼び出し
+greet()  # Hello
+greet()  # Hello
+</code></pre>
+
+<h2>引数</h2>
+
+<p>関数には引数を指定することができます。
+引数とは呼び出し側から関数へ値を受け渡す仕組みです。</p>
+
+<pre><code class="python">def add(x, y):
+  print(x + y)
+
+add(1, 2)   # 3
+add(2, -3)  # -1
+</code></pre>
+
+<h2>戻り値</h2>
+
+<p>関数には戻り値を指定することができます。
+戻り値とは関数から呼び出し側へ値を返す仕組みです。</p>
+
+<pre><code class="python">def add(x, y):
+  return x + y
+
+result1 = add(1, 2)
+result2 = add(2, -3)
+
+print(result1)  # 3
+print(result2)  # -1
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>高度な引数利用</h2>
+
+<h3>引数のデフォルト値</h3>
+
+<p>引数にデフォルト値を定義することができます。</p>
+
+<pre><code class="python">def greet(hour=8):
+  if(hour &gt;= 6 and hour &lt; 12):
+    return 'Good Morning'
+  elif(hour &gt;=12 and hour &lt; 18):
+    return "Hello"
+  else:
+    return "Good Evening"
+
+
+print(greet()) # Good Morning
+print(greet(14))  # Hello
+</code></pre>
+
+<h3>キーワード付き引数</h3>
+
+<p>引数受け渡し時に、引数名を指定して値を渡すことができます。</p>
+
+<pre><code class="python">def add(x=10, y= 0):
+  return x + y
+
+print(add(y=100))  # 110
+print(add(x=20, y=10))  # 30
+</code></pre>
+
+<h3>引数をタプル形式で受け取る</h3>
+
+<p><code>*</code>を使用し、0個以上の値をタプル形式で受け取ることができます。</p>
+
+<pre><code class="python">def add(*elements):
+  print(elements)
+  result = 0
+  for element in elements:
+    result += element
+
+  return result
+
+result1 = add(10, 10, 20, 30)
+result2 = add(10, 10)
+
+print(result1)  # 70
+print(result2)  # 20
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h3>引数をディクショナリ形式で受け取る</h3>
+
+<p><code>**</code>を使用し、0個以上の値をディクショナリ形式で受け取ることができます。</p>
+
+<pre><code class="python">def add(**elements):
+  print(elements)
+  result = 0
+  for element in elements.values():
+    result += element
+
+  return result
+
+result = add(x=10, y=20, z=30)
+print(result)
+</code></pre>
+
+<h2>docstring</h2>
+
+<p>docstringの機能を使用することで関数に説明文をつけることができます。
+docstringを参照するにはhelp関数や<strong>doc</strong>を使用する。</p>
+
+<pre><code class="python">def add(x, y):
+  '''
+  arg1 : x &lt; 0 return false
+  arg2 : y &lt; 0 return false
+  else : return x + y
+  '''
+  if(x &lt; 0 or y &lt; 0):
+    return false
+
+  return x + y
+
+help(add)
+print(add.__doc__)
+</code></pre>
+
+<p>IPythonを使用していれば、イントロスペクションの機能で参照することもできる。</p>
+
+<pre><code class="python">In [8]: def add(x, y):
+   ...:   '''
+   ...:   arg1 : x &lt; 0 return false
+   ...:   arg2 : y &lt; 0 return false
+   ...:   else : return x + y
+   ...:   '''
+   ...:   if(x &lt; 0 or y &lt; 0):
+   ...:     return false
+   ...:
+   ...:   return x + y
+   ...:
+
+In [9]: add?
+Signature: add(x, y)
+Docstring:
+arg1 : x &lt; 0 return false
+arg2 : y &lt; 0 return false
+else : return x + y
+File:      ~/&lt;ipython-input-8-616a4d0d9633&gt;
+Type:      function
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>スコープ</h2>
+
+<p>スコープとは参照範囲のことを表します。</p>
+
+<h3>ローカル変数</h3>
+
+<p>関数内で定義した変数はローカル変数と呼ばれ、関数外では参照できません。</p>
+
+<pre><code class="python">def greet():
+  message = "Hello"
+
+print(message) # NameError: name 'message' is not defined
+</code></pre>
+
+<h3>グローバル変数</h3>
+
+<p>関数外で定義した変数はグローバル変数と呼ばれ、関数内でも参照できます。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  print(message)
+
+greet() # Hello
+</code></pre>
+
+<p>では以下のように記述した場合、どちらの変数が参照されるでしょうか。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  message = "Good Morning"
+
+greet()
+print(message)
+</code></pre>
+
+<p>関数内でグローバル変数と同じ名前のローカル変数が定義された場合、関数内ではローカル変数が優先されて参照されます。グローバル変数にアクセスしたい場合は、<code>global 変数名</code>を使用します。</p>
+
+<pre><code class="python">message = "Hello"
+
+def greet():
+  # greet関数内ではグローバル変数のmessageが参照される
+  global message
+  message = "Good Morning"
+
+greet()
+print(message)
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>関数オブジェクト</h2>
+
+<p>Pythonでは関数もオブジェクトとして扱うことができます。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+def run_something(func):
+  func()
+
+run_something(greet)  # Hello
+</code></pre>
+
+<p><code>()</code>が関数呼び出しを意味しているため、<code>()</code>が無い場合は関数もオブジェクトとして扱います。</p>
+
+<pre><code class="python">def greet():
+  print("Hello")
+
+print(type(greet))  # &lt;class 'function'&gt;
+</code></pre>
+
+<h2>関数のネスト</h2>
+
+<p>関数内に別の関数を定義し、使用することができます。</p>
+
+<pre><code class="python">def multi(x, y):
+  def add(x, y):
+    return x + y
+
+  result = 0
+  for i in range(y):
+    result = add(result, x)
+
+  return result
+
+multi(3, 4)
+</code></pre>
+
+<h2>クロージャ</h2>
+
+<p>クロージャとは、関数内部の変数を永続的に保持するための仕組みです。</p>
+
+<pre><code class="python">def gen_calc_circle_area(pi):
+  def calc_circle_area(radius):
+    return pi * radius ** 2
+
+  return calc_circle_area
+
+# 円周率を3で計算するクロージャを生成
+calc_circle_area1 = gen_calc_circle_area(3)
+
+print(calc_circle_area1(1)) # 3
+print(calc_circle_area1(2)) # 12
+
+# 円周率は3.14で計算するクロージャを生成
+calc_circle_area2 = gen_calc_circle_area(3.14)
+
+print(calc_circle_area2(1)) # 3.14
+print(calc_circle_area2(2)) # 12.56
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>ラムダ式</h2>
+
+<p>基本的に関数は関数名をつけて定義すると学習しましたが、ラムダ式の機能を利用することで、無名の関数を定義することができます。
+主に、一時的に使用される関数や、動的に内容を変更する必要がある関数に用いられます。</p>
+
+<pre><code class="python"># 関数名をつけずに定義する
+add = lambda x, y: x + y
+print(type(add))  # &lt;class 'function'&gt;
+print(add(2, 3))  # 5
+</code></pre>
+
+<p>ラムダ式はどのような時に使うのでしょうか。
+filter関数を例にとって考えてみましょう。
+filter関数は、第一引数に論理値を返す関数オブジェクト、第二引数にリストを受け取る関数です。
+IPythonで確認してみましょう。</p>
+
+<pre><code class="python">In [25]: filter?
+Init signature: filter(self, /, *args, **kwargs)
+Docstring:
+filter(function or None, iterable) --&gt; filter object
+
+Return an iterator yielding those items of iterable for which function(item)
+is true. If function is None, return the items that are true.
+Type:           type
+</code></pre>
+
+<p>filter関数はリストの要素を一つずつ、第一引数の関数オブジェクトに渡して、論理値を受け取ります。
+受け取った値がTrueのものだけ取得してくれます。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+over80 = lambda point: point &gt; 80
+
+filter_over80 = filter(over80, points)
+
+passings = list(filter_over80)
+
+print(passings) # [90, 100]
+</code></pre>
+
+<p>省略して以下のように記述するのが一般的です。</p>
+
+<pre><code class="python">points = [80, 75, 90, 100]
+
+passings = list(filter(lambda point: point &gt; 80, points))
+
+print(passings) # [90, 100]
+</code></pre>
+
+<div style="page-break-before:always"></div>
+
+
+<h2>デコレータ</h2>
+
+<p>デコレータは関数内関数の機能を利用して、処理の前後に共通の処理を記述したい場合に用いる。</p>
+
+<pre><code class="python">def add(x, y):
+  print("calculating...")
+  return x + y
+
+# デコレータ
+def logging(func):
+  def new_function(*args):
+    print("start")
+    result = func(*args)
+    print("finished")
+    return result
+
+  return new_function
+
+add = logging(add)
+print(add(1, 2))
+</code></pre>
+
+<p><code>@シンボル</code>を利用することで、シンプルにデコレータを関数に実装することができます。</p>
+
+<pre><code class="python">@logging
+def add(x, y):
+  print("calculating...")
+  return x + y
+
+# デコレータ
+def logging(func):
+  def new_function(*args):
+    print("start")
+    result = func(*args)
+    print("finished")
+    return result
+
+  return new_function
+
+print(add(1, 2))
+</code></pre>
